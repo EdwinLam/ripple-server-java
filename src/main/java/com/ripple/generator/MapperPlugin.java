@@ -1,15 +1,13 @@
-package mybatis.generator;
+package com.ripple.generator;
 
 import org.codehaus.plexus.util.StringUtils;
 import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
-import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.CommentGeneratorConfiguration;
 import org.mybatis.generator.config.Context;
-import org.mybatis.generator.exception.ShellException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
 import java.io.File;
@@ -31,7 +29,7 @@ public class MapperPlugin extends PluginAdapter{
     private CommentGeneratorConfiguration commentCfg;
     public static final char UNDERLINE='_';
     private static final String DEFAULT_DAO_SUPER_CLASS = "mybatis.generator.BaseMapper";
-    private static final String DEFAULT_EXPAND_DAO_SUPER_CLASS = "com.ripple.dao.base.BaseDao";
+    private static final String DEFAULT_EXPAND_DAO_SUPER_CLASS = "com.ripple.dao.BaseDao";
     private String daoTargetDir;
     private String daoTargetPackage;
 
@@ -96,22 +94,24 @@ public class MapperPlugin extends PluginAdapter{
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
 
-        //创建Select查询
+//        //创建Select查询
         XmlElement select = new XmlElement("select");
-        select.addAttribute(new Attribute("id", "selectAll"));
-        select.addAttribute(new Attribute("resultMap", "BaseResultMap"));
-        select.addAttribute(new Attribute("parameterType", introspectedTable.getBaseRecordType()));
-        select.addElement(new TextElement("select * from "+ introspectedTable.getFullyQualifiedTableNameAtRuntime()));
-
-        XmlElement queryPage = new XmlElement("select");
-        queryPage.addAttribute(new Attribute("id", "queryPage"));
-        queryPage.addAttribute(new Attribute("resultMap", "BaseResultMap"));
-        queryPage.addAttribute(new Attribute("parameterType", "com.fendo.bean.Page"));
-        queryPage.addElement(new TextElement("select * from "+ introspectedTable.getFullyQualifiedTableNameAtRuntime()));
-
+//        select.addAttribute(new Attribute("id", "selectAll"));
+//        select.addAttribute(new Attribute("resultMap", "BaseResultMap"));
+//        select.addAttribute(new Attribute("parameterType", introspectedTable.getBaseRecordType()));
+//        select.addElement(new TextElement("select * from "+ introspectedTable.getFullyQualifiedTableNameAtRuntime()));
+//
+//        XmlElement queryPage = new XmlElement("select");
+//        queryPage.addAttribute(new Attribute("id", "queryPage"));
+//        queryPage.addAttribute(new Attribute("resultMap", "BaseResultMap"));
+//        queryPage.addAttribute(new Attribute("parameterType", "com.fendo.bean.Page"));
+//        queryPage.addElement(new TextElement("select * from "+ introspectedTable.getFullyQualifiedTableNameAtRuntime()));
+//
         XmlElement parentElement = document.getRootElement();
-        parentElement.addElement(select);
-        parentElement.addElement(queryPage);
+        List<Attribute> attributes = parentElement.getAttributes();
+        Attribute ele = attributes.get(0);
+//        parentElement.addElement(select);
+//        parentElement.addElement(queryPage);
         return super.sqlMapDocumentGenerated(document, introspectedTable);
     }
 
@@ -119,16 +119,15 @@ public class MapperPlugin extends PluginAdapter{
         JavaFormatter javaFormatter = context.getJavaFormatter();
         List<GeneratedJavaFile> mapperJavaFiles = new ArrayList<GeneratedJavaFile>();
         // 初始化各种路径
-        String modelPackage = daoTargetPackage + ".model";
-        // 获取表名
+        String entityPackage = daoTargetPackage + ".entity.";
         String tableNamesStr = introspectedTable.getFullyQualifiedTable().getIntrospectedTableName();
         String[] tableNames = tableNamesStr.split("_");
-        // 获取目录路径
         String basePackage = daoTargetPackage;
         String packagePath =daoTargetPackage.replaceAll(escapeExprSpecialWord("."),"\\\\");
         String daoPath = daoTargetDir+File.separator+packagePath+File.separator+"dao";
         String tablePath = daoPath;
         String tablePackage = "";
+        String keyName = tablePackage+underlineToCamel(tableNamesStr);
         for(int i=0;i<tableNames.length;i++){
             if(i!=tableNames.length-1) {
                 tablePath += File.separator + tableNames[i];
@@ -137,20 +136,23 @@ public class MapperPlugin extends PluginAdapter{
         }
         File dir =new File(tablePath);
         dir.mkdirs();
-        // 生成Model扩展类
-        String modelExPackage = modelPackage+tablePackage+underlineToCamel(tableNamesStr) + "Ex";
+
+        // 生成entity扩展类
+        String modelExPackage = entityPackage+keyName + "Ex";
+        FullyQualifiedJavaType entitySuperType = new FullyQualifiedJavaType( entityPackage+keyName);
         TopLevelClass topLevelClass = new TopLevelClass(modelExPackage);
+        topLevelClass.addImportedType(entitySuperType);
+        topLevelClass.setSuperClass(entitySuperType);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         topLevelClass.addJavaDocLine("/**");
-        topLevelClass.addJavaDocLine(" * " + introspectedTable.getRemarks() );
+        topLevelClass.addJavaDocLine(" * " + introspectedTable.getRemarks() +"[扩展]" );
         topLevelClass.addJavaDocLine(" * @author " + author );
         topLevelClass.addJavaDocLine(" */");
         GeneratedJavaFile modelExFile = new GeneratedJavaFile(topLevelClass, daoTargetDir, javaFormatter);
         mapperJavaFiles.add(modelExFile);
 
         // dao类
-        String daoInterfacePackage = daoTargetPackage + ".dao."+tablePackage+underlineToCamel(tableNamesStr) + "DAO";
-        System.out.println(daoInterfacePackage);
+        String daoInterfacePackage = daoTargetPackage + ".dao."+keyName+ "DAO";
         Interface daoInterface = new Interface(daoInterfacePackage);
         daoInterface.setVisibility(JavaVisibility.PUBLIC);
         daoInterface.addJavaDocLine("/**");
@@ -158,11 +160,10 @@ public class MapperPlugin extends PluginAdapter{
         daoInterface.addJavaDocLine(" * @author " + author );
         daoInterface.addJavaDocLine(" */");
         FullyQualifiedJavaType daoSuperType = new FullyQualifiedJavaType(expandDaoSuperClass);
-        daoSuperType.addTypeArgument(daoInterface.getType());
-        daoInterface.addImportedType(daoSuperType);
+        daoSuperType.addTypeArgument(entitySuperType);
+        daoInterface.addImportedType(entitySuperType);
         daoInterface.addSuperInterface(daoSuperType);
         daoInterface.getType().getPackageName();
-        System.out.println(daoPath);
         GeneratedJavaFile daoFile = new GeneratedJavaFile(daoInterface, daoTargetDir, javaFormatter);
         mapperJavaFiles.add(daoFile);
 
@@ -253,6 +254,11 @@ public class MapperPlugin extends PluginAdapter{
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public void initialized(IntrospectedTable introspectedTable) {
+        introspectedTable.setMyBatis3XmlMapperPackage("");
     }
 
 }

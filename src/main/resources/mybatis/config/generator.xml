@@ -3,16 +3,16 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <context id="my" targetRuntime="MyBatis3">
+    <context id="my" targetRuntime="com.ripple.generator.TkMyBatis3Impl">
 
         <!-- 自动生成tostring方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
         <!-- 自动生成equals方法和hashcode方法 -->
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
-        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
 
         <!-- 自定义方法 -->
-        <plugin type="mybatis.generator.MapperPlugin">
+        <plugin type="com.ripple.generator.MapperPlugin">
             <property name="targetProject" value="src\main\java"/>
             <property name="targetPackage" value="com.ripple"/>
         </plugin>
@@ -43,12 +43,11 @@
             <property name="enableSubPackages" value="false" />
             <!-- 从数据库返回的值被清理前后的空格 -->
             <property name="trimStrings" value="true" />
-            <property name="rootClass" value="mybatis.generator.BaseModel"/>
+            <property name="rootClass" value="com.ripple.entity.BaseEntity"/>
         </javaModelGenerator>
 
         <!--生成映射文件存放位置-->
-        <!--同样Mac用户：targetProject 为全路径-->
-        <sqlMapGenerator targetPackage="com.ripple.mapper" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="com.ripple.dao" targetProject="src/main/resources/mybatis">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
             <property name="rootInterface" value="mybatis.generator.BaseMapper"/>
@@ -57,9 +56,7 @@
         <!-- 配置表信息 -->
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
             是否生成 example类 -->
-
-        <table schema="test" tableName="mall_attribute"
-               domainObjectName="attribute" enableCountByExample="false"
+        <table tableName="%" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
             <property name="useActualColumnNames" value="true"/>

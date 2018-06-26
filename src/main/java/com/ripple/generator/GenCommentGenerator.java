@@ -1,4 +1,4 @@
-package mybatis.generator;
+package com.ripple.generator;
 
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;

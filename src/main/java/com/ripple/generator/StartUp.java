@@ -1,4 +1,4 @@
-package mybatis.generator;
+package com.ripple.generator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +25,7 @@ public class StartUp {
             List<String> warnings = new ArrayList<String>();
             boolean overwrite = true;
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            InputStream is = classloader.getResourceAsStream("mybatis/generator.xml");
+            InputStream is = classloader.getResourceAsStream("mybatis/config/generator.xml");
             ConfigurationParser cp = new ConfigurationParser(warnings);
             Configuration config = cp.parseConfiguration(is);
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);

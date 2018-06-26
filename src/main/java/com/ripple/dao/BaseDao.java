@@ -1,10 +1,8 @@
-package com.ripple.dao.base;
-
-import mybatis.generator.BaseModel;
+package com.ripple.dao;
 
 import java.util.List;
 
-public interface BaseDao<T extends BaseModel> {
+public interface BaseDao<T> {
 
     List<T> selectAll();
 
