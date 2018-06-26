@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ripple.dao.MallAttributeMapper">
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallAttribute">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+    <result column="attributeName" jdbcType="VARCHAR" property="attributeName" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, typeId, attributeName, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute (id, typeId, attributeName, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{attributeName,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        typeId,
+      </if>
+      <if test="attributeName != null">
+        attributeName,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    <set>
+      <if test="typeId != null">
+        typeId = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        attributeName = #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    set typeId = #{typeId,jdbcType=INTEGER},
+      attributeName = #{attributeName,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallAttribute">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+    <result column="attributeName" jdbcType="VARCHAR" property="attributeName" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, typeId, attributeName, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute (id, typeId, attributeName, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{attributeName,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        typeId,
+      </if>
+      <if test="attributeName != null">
+        attributeName,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    <set>
+      <if test="typeId != null">
+        typeId = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        attributeName = #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    set typeId = #{typeId,jdbcType=INTEGER},
+      attributeName = #{attributeName,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallAttribute">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+    <result column="attributeName" jdbcType="VARCHAR" property="attributeName" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, typeId, attributeName, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute (id, typeId, attributeName, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{attributeName,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        typeId,
+      </if>
+      <if test="attributeName != null">
+        attributeName,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    <set>
+      <if test="typeId != null">
+        typeId = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        attributeName = #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    set typeId = #{typeId,jdbcType=INTEGER},
+      attributeName = #{attributeName,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallAttribute">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+    <result column="attributeName" jdbcType="VARCHAR" property="attributeName" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, typeId, attributeName, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute (id, typeId, attributeName, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{attributeName,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        typeId,
+      </if>
+      <if test="attributeName != null">
+        attributeName,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    <set>
+      <if test="typeId != null">
+        typeId = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        attributeName = #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    set typeId = #{typeId,jdbcType=INTEGER},
+      attributeName = #{attributeName,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallAttribute">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+    <result column="attributeName" jdbcType="VARCHAR" property="attributeName" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, typeId, attributeName, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute (id, typeId, attributeName, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{attributeName,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        typeId,
+      </if>
+      <if test="attributeName != null">
+        attributeName,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    <set>
+      <if test="typeId != null">
+        typeId = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        attributeName = #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    set typeId = #{typeId,jdbcType=INTEGER},
+      attributeName = #{attributeName,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallAttribute">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+    <result column="attributeName" jdbcType="VARCHAR" property="attributeName" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, typeId, attributeName, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute (id, typeId, attributeName, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{attributeName,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        typeId,
+      </if>
+      <if test="attributeName != null">
+        attributeName,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    <set>
+      <if test="typeId != null">
+        typeId = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        attributeName = #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    set typeId = #{typeId,jdbcType=INTEGER},
+      attributeName = #{attributeName,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallAttribute">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+    <result column="attributeName" jdbcType="VARCHAR" property="attributeName" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, typeId, attributeName, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute (id, typeId, attributeName, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{attributeName,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallAttribute">
+    insert into mall_attribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        typeId,
+      </if>
+      <if test="attributeName != null">
+        attributeName,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    <set>
+      <if test="typeId != null">
+        typeId = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeName != null">
+        attributeName = #{attributeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallAttribute">
+    update mall_attribute
+    set typeId = #{typeId,jdbcType=INTEGER},
+      attributeName = #{attributeName,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

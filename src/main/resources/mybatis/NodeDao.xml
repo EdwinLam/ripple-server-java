@@ -1,0 +1,1201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ripple.dao.NodeMapper">
+  <resultMap id="BaseResultMap" type="com.ripple.entity.Node">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="isModule" jdbcType="INTEGER" property="isModule" />
+    <result column="appId" jdbcType="INTEGER" property="appId" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="parentId" jdbcType="INTEGER" property="parentId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="componentPath" jdbcType="VARCHAR" property="componentPath" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, isModule, appId, link, parentId, title, icon, path, name, componentPath, createdAt, 
+    updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from node
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from node
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.Node">
+    insert into node (id, isModule, appId, 
+      link, parentId, title, 
+      icon, path, name, componentPath, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{isModule,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, 
+      #{link,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{componentPath,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.Node">
+    insert into node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="isModule != null">
+        isModule,
+      </if>
+      <if test="appId != null">
+        appId,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="parentId != null">
+        parentId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="componentPath != null">
+        componentPath,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isModule != null">
+        #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.Node">
+    update node
+    <set>
+      <if test="isModule != null">
+        isModule = #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        appId = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parentId = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        componentPath = #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.Node">
+    update node
+    set isModule = #{isModule,jdbcType=INTEGER},
+      appId = #{appId,jdbcType=INTEGER},
+      link = #{link,jdbcType=VARCHAR},
+      parentId = #{parentId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      componentPath = #{componentPath,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.Node">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="isModule" jdbcType="INTEGER" property="isModule" />
+    <result column="appId" jdbcType="INTEGER" property="appId" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="parentId" jdbcType="INTEGER" property="parentId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="componentPath" jdbcType="VARCHAR" property="componentPath" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, isModule, appId, link, parentId, title, icon, path, name, componentPath, createdAt, 
+    updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from node
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from node
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.Node">
+    insert into node (id, isModule, appId, 
+      link, parentId, title, 
+      icon, path, name, componentPath, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{isModule,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, 
+      #{link,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{componentPath,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.Node">
+    insert into node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="isModule != null">
+        isModule,
+      </if>
+      <if test="appId != null">
+        appId,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="parentId != null">
+        parentId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="componentPath != null">
+        componentPath,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isModule != null">
+        #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.Node">
+    update node
+    <set>
+      <if test="isModule != null">
+        isModule = #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        appId = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parentId = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        componentPath = #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.Node">
+    update node
+    set isModule = #{isModule,jdbcType=INTEGER},
+      appId = #{appId,jdbcType=INTEGER},
+      link = #{link,jdbcType=VARCHAR},
+      parentId = #{parentId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      componentPath = #{componentPath,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.Node">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="isModule" jdbcType="INTEGER" property="isModule" />
+    <result column="appId" jdbcType="INTEGER" property="appId" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="parentId" jdbcType="INTEGER" property="parentId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="componentPath" jdbcType="VARCHAR" property="componentPath" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, isModule, appId, link, parentId, title, icon, path, name, componentPath, createdAt, 
+    updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from node
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from node
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.Node">
+    insert into node (id, isModule, appId, 
+      link, parentId, title, 
+      icon, path, name, componentPath, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{isModule,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, 
+      #{link,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{componentPath,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.Node">
+    insert into node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="isModule != null">
+        isModule,
+      </if>
+      <if test="appId != null">
+        appId,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="parentId != null">
+        parentId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="componentPath != null">
+        componentPath,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isModule != null">
+        #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.Node">
+    update node
+    <set>
+      <if test="isModule != null">
+        isModule = #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        appId = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parentId = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        componentPath = #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.Node">
+    update node
+    set isModule = #{isModule,jdbcType=INTEGER},
+      appId = #{appId,jdbcType=INTEGER},
+      link = #{link,jdbcType=VARCHAR},
+      parentId = #{parentId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      componentPath = #{componentPath,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.Node">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="isModule" jdbcType="INTEGER" property="isModule" />
+    <result column="appId" jdbcType="INTEGER" property="appId" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="parentId" jdbcType="INTEGER" property="parentId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="componentPath" jdbcType="VARCHAR" property="componentPath" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, isModule, appId, link, parentId, title, icon, path, name, componentPath, createdAt, 
+    updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from node
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from node
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.Node">
+    insert into node (id, isModule, appId, 
+      link, parentId, title, 
+      icon, path, name, componentPath, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{isModule,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, 
+      #{link,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{componentPath,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.Node">
+    insert into node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="isModule != null">
+        isModule,
+      </if>
+      <if test="appId != null">
+        appId,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="parentId != null">
+        parentId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="componentPath != null">
+        componentPath,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isModule != null">
+        #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.Node">
+    update node
+    <set>
+      <if test="isModule != null">
+        isModule = #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        appId = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parentId = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        componentPath = #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.Node">
+    update node
+    set isModule = #{isModule,jdbcType=INTEGER},
+      appId = #{appId,jdbcType=INTEGER},
+      link = #{link,jdbcType=VARCHAR},
+      parentId = #{parentId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      componentPath = #{componentPath,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.Node">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="isModule" jdbcType="INTEGER" property="isModule" />
+    <result column="appId" jdbcType="INTEGER" property="appId" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="parentId" jdbcType="INTEGER" property="parentId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="componentPath" jdbcType="VARCHAR" property="componentPath" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, isModule, appId, link, parentId, title, icon, path, name, componentPath, createdAt, 
+    updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from node
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from node
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.Node">
+    insert into node (id, isModule, appId, 
+      link, parentId, title, 
+      icon, path, name, componentPath, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{isModule,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, 
+      #{link,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{componentPath,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.Node">
+    insert into node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="isModule != null">
+        isModule,
+      </if>
+      <if test="appId != null">
+        appId,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="parentId != null">
+        parentId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="componentPath != null">
+        componentPath,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isModule != null">
+        #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.Node">
+    update node
+    <set>
+      <if test="isModule != null">
+        isModule = #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        appId = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parentId = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        componentPath = #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.Node">
+    update node
+    set isModule = #{isModule,jdbcType=INTEGER},
+      appId = #{appId,jdbcType=INTEGER},
+      link = #{link,jdbcType=VARCHAR},
+      parentId = #{parentId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      componentPath = #{componentPath,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.Node">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="isModule" jdbcType="INTEGER" property="isModule" />
+    <result column="appId" jdbcType="INTEGER" property="appId" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="parentId" jdbcType="INTEGER" property="parentId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="componentPath" jdbcType="VARCHAR" property="componentPath" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, isModule, appId, link, parentId, title, icon, path, name, componentPath, createdAt, 
+    updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from node
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from node
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.Node">
+    insert into node (id, isModule, appId, 
+      link, parentId, title, 
+      icon, path, name, componentPath, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{isModule,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, 
+      #{link,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{componentPath,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.Node">
+    insert into node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="isModule != null">
+        isModule,
+      </if>
+      <if test="appId != null">
+        appId,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="parentId != null">
+        parentId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="componentPath != null">
+        componentPath,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isModule != null">
+        #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.Node">
+    update node
+    <set>
+      <if test="isModule != null">
+        isModule = #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        appId = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parentId = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        componentPath = #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.Node">
+    update node
+    set isModule = #{isModule,jdbcType=INTEGER},
+      appId = #{appId,jdbcType=INTEGER},
+      link = #{link,jdbcType=VARCHAR},
+      parentId = #{parentId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      componentPath = #{componentPath,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.Node">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="isModule" jdbcType="INTEGER" property="isModule" />
+    <result column="appId" jdbcType="INTEGER" property="appId" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="parentId" jdbcType="INTEGER" property="parentId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="componentPath" jdbcType="VARCHAR" property="componentPath" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, isModule, appId, link, parentId, title, icon, path, name, componentPath, createdAt, 
+    updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from node
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from node
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.Node">
+    insert into node (id, isModule, appId, 
+      link, parentId, title, 
+      icon, path, name, componentPath, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{isModule,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, 
+      #{link,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{componentPath,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.Node">
+    insert into node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="isModule != null">
+        isModule,
+      </if>
+      <if test="appId != null">
+        appId,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="parentId != null">
+        parentId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="componentPath != null">
+        componentPath,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isModule != null">
+        #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.Node">
+    update node
+    <set>
+      <if test="isModule != null">
+        isModule = #{isModule,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        appId = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parentId = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="componentPath != null">
+        componentPath = #{componentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.Node">
+    update node
+    set isModule = #{isModule,jdbcType=INTEGER},
+      appId = #{appId,jdbcType=INTEGER},
+      link = #{link,jdbcType=VARCHAR},
+      parentId = #{parentId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      componentPath = #{componentPath,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
