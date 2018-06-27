@@ -4182,4 +4182,230 @@
       updateAt = #{updateAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallItemSku">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="itemId" jdbcType="INTEGER" property="itemId" />
+    <result column="attributeValues" jdbcType="VARCHAR" property="attributeValues" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="stockQuantity" jdbcType="INTEGER" property="stockQuantity" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="updateAt" jdbcType="TIMESTAMP" property="updateAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, itemId, attributeValues, price, stockQuantity, createAt, updateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_item_sku
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_item_sku
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallItemSku">
+    insert into mall_item_sku (id, itemId, attributeValues, 
+      price, stockQuantity, createAt, 
+      updateAt)
+    values (#{id,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{attributeValues,jdbcType=VARCHAR}, 
+      #{price,jdbcType=REAL}, #{stockQuantity,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{updateAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallItemSku">
+    insert into mall_item_sku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="itemId != null">
+        itemId,
+      </if>
+      <if test="attributeValues != null">
+        attributeValues,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="stockQuantity != null">
+        stockQuantity,
+      </if>
+      <if test="createAt != null">
+        createAt,
+      </if>
+      <if test="updateAt != null">
+        updateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeValues != null">
+        #{attributeValues,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="stockQuantity != null">
+        #{stockQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallItemSku">
+    update mall_item_sku
+    <set>
+      <if test="itemId != null">
+        itemId = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeValues != null">
+        attributeValues = #{attributeValues,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="stockQuantity != null">
+        stockQuantity = #{stockQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        createAt = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null">
+        updateAt = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallItemSku">
+    update mall_item_sku
+    set itemId = #{itemId,jdbcType=INTEGER},
+      attributeValues = #{attributeValues,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      stockQuantity = #{stockQuantity,jdbcType=INTEGER},
+      createAt = #{createAt,jdbcType=TIMESTAMP},
+      updateAt = #{updateAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallItemSku">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="itemId" jdbcType="INTEGER" property="itemId" />
+    <result column="attributeValues" jdbcType="VARCHAR" property="attributeValues" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="stockQuantity" jdbcType="INTEGER" property="stockQuantity" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="updateAt" jdbcType="TIMESTAMP" property="updateAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, itemId, attributeValues, price, stockQuantity, createAt, updateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_item_sku
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_item_sku
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallItemSku">
+    insert into mall_item_sku (id, itemId, attributeValues, 
+      price, stockQuantity, createAt, 
+      updateAt)
+    values (#{id,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{attributeValues,jdbcType=VARCHAR}, 
+      #{price,jdbcType=REAL}, #{stockQuantity,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{updateAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallItemSku">
+    insert into mall_item_sku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="itemId != null">
+        itemId,
+      </if>
+      <if test="attributeValues != null">
+        attributeValues,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="stockQuantity != null">
+        stockQuantity,
+      </if>
+      <if test="createAt != null">
+        createAt,
+      </if>
+      <if test="updateAt != null">
+        updateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeValues != null">
+        #{attributeValues,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="stockQuantity != null">
+        #{stockQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallItemSku">
+    update mall_item_sku
+    <set>
+      <if test="itemId != null">
+        itemId = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeValues != null">
+        attributeValues = #{attributeValues,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="stockQuantity != null">
+        stockQuantity = #{stockQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        createAt = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null">
+        updateAt = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallItemSku">
+    update mall_item_sku
+    set itemId = #{itemId,jdbcType=INTEGER},
+      attributeValues = #{attributeValues,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      stockQuantity = #{stockQuantity,jdbcType=INTEGER},
+      createAt = #{createAt,jdbcType=TIMESTAMP},
+      updateAt = #{updateAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

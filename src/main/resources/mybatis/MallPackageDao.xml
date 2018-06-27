@@ -1999,4 +1999,112 @@
     set packageName = #{packageName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallPackage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="packageName" jdbcType="VARCHAR" property="packageName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, packageName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_package
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_package
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallPackage">
+    insert into mall_package (id, packageName)
+    values (#{id,jdbcType=INTEGER}, #{packageName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallPackage">
+    insert into mall_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="packageName != null">
+        packageName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="packageName != null">
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallPackage">
+    update mall_package
+    <set>
+      <if test="packageName != null">
+        packageName = #{packageName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallPackage">
+    update mall_package
+    set packageName = #{packageName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.MallPackage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="packageName" jdbcType="VARCHAR" property="packageName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, packageName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_package
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_package
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.MallPackage">
+    insert into mall_package (id, packageName)
+    values (#{id,jdbcType=INTEGER}, #{packageName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.MallPackage">
+    insert into mall_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="packageName != null">
+        packageName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="packageName != null">
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.MallPackage">
+    update mall_package
+    <set>
+      <if test="packageName != null">
+        packageName = #{packageName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.MallPackage">
+    update mall_package
+    set packageName = #{packageName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

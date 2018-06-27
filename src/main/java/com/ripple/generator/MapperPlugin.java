@@ -1,6 +1,7 @@
 package com.ripple.generator;
 
 import com.google.common.base.CaseFormat;
+import com.ripple.generator.items.DaoGenerator;
 import org.codehaus.plexus.util.StringUtils;
 import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.java.*;
@@ -15,7 +16,6 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 
@@ -28,6 +28,7 @@ import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
  * @version V1.0
  */
 public class MapperPlugin extends PluginAdapter{
+    private GeneratorConfig generatorConfig;
     // 注释生成器
     private CommentGeneratorConfiguration commentCfg;
     public static final char UNDERLINE='_';
@@ -224,6 +225,7 @@ public class MapperPlugin extends PluginAdapter{
             String daoInterfacePackage = daoTargetPackage + ".dao."+keyName+ "DAO";
             Interface daoInterface = new Interface(daoInterfacePackage);
             daoInterface.setVisibility(JavaVisibility.PUBLIC);
+            daoInterface.addAnnotation("@Mapper");
             daoInterface.addJavaDocLine("/**");
             daoInterface.addJavaDocLine(" * " + introspectedTable.getRemarks() );
             daoInterface.addJavaDocLine(" * @author " + author );
@@ -234,7 +236,8 @@ public class MapperPlugin extends PluginAdapter{
             daoInterface.addSuperInterface(daoSuperType);
             daoInterface.getType().getPackageName();
             GeneratedJavaFile daoFile = new GeneratedJavaFile(daoInterface, daoTargetDir, javaFormatter);
-            mapperJavaFiles.add(daoFile);
+//            mapperJavaFiles.add(daoFile);
+            mapperJavaFiles.add(new DaoGenerator(generatorConfig).generator());
 
             // service
             String serviceInterfacePackage = daoTargetPackage + ".service.I" + keyName + "Service";
@@ -296,6 +299,7 @@ public class MapperPlugin extends PluginAdapter{
 
     @Override
     public void initialized(IntrospectedTable introspectedTable) {
+        generatorConfig = new GeneratorConfig(context,introspectedTable,daoTargetPackage,daoTargetDir,author);
         introspectedTable.setMyBatis3XmlMapperPackage("");
     }
 
