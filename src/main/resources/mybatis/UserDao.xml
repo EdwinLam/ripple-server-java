@@ -869,4 +869,3724 @@
       updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ripple.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="isMain" jdbcType="INTEGER" property="isMain" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdAt" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updatedAt" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, userName, sex, isMain, phone, createdAt, updatedAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ripple.entity.User">
+    insert into user (id, accountId, userName, 
+      sex, isMain, phone, 
+      createdAt, updatedAt)
+    values (#{id,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{isMain,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripple.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        accountId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="isMain != null">
+        isMain,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdAt != null">
+        createdAt,
+      </if>
+      <if test="updatedAt != null">
+        updatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripple.entity.User">
+    update user
+    <set>
+      <if test="accountId != null">
+        accountId = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null">
+        isMain = #{isMain,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripple.entity.User">
+    update user
+    set accountId = #{accountId,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      isMain = #{isMain,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdAt,jdbcType=TIMESTAMP},
+      updatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

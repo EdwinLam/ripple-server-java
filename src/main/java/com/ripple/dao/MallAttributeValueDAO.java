@@ -6,5 +6,5 @@ import com.ripple.entity.MallAttributeValue;
  * 
  * @author Edwin
  */
-public interface MallAttributeValueDAO extends BaseDao<MallAttributeValue> {
+public interface MallAttributeValueDAO extends com.ripple.base.IBaseDao<MallAttributeValue> {
 }

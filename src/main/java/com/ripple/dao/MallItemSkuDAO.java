@@ -6,5 +6,5 @@ import com.ripple.entity.MallItemSku;
  * 
  * @author Edwin
  */
-public interface MallItemSkuDAO extends BaseDao<MallItemSku> {
+public interface MallItemSkuDAO extends com.ripple.base.IBaseDao<MallItemSku> {
 }

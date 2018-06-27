@@ -7,9 +7,6 @@
 
         <!-- 自动生成tostring方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
-        <!-- 自动生成equals方法和hashcode方法 -->
-        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
-
 
         <!-- 自定义方法 -->
         <plugin type="com.ripple.generator.MapperPlugin">

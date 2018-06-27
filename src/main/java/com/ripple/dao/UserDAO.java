@@ -6,5 +6,5 @@ import com.ripple.entity.User;
  * 
  * @author Edwin
  */
-public interface UserDAO extends BaseDao<User> {
+public interface UserDAO extends com.ripple.base.IBaseDao<User> {
 }

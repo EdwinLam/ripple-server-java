@@ -6,5 +6,5 @@ import com.ripple.entity.MallType;
  * 
  * @author Edwin
  */
-public interface MallTypeDAO extends BaseDao<MallType> {
+public interface MallTypeDAO extends com.ripple.base.IBaseDao<MallType> {
 }

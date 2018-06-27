@@ -15,6 +15,7 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 
@@ -31,7 +32,9 @@ public class MapperPlugin extends PluginAdapter{
     private CommentGeneratorConfiguration commentCfg;
     public static final char UNDERLINE='_';
     private static final String DEFAULT_DAO_SUPER_CLASS = "mybatis.generator.BaseMapper";
-    private static final String DEFAULT_EXPAND_DAO_SUPER_CLASS = "com.ripple.dao.BaseDao";
+    private static final String DEFAULT_EXPAND_DAO_SUPER_CLASS = "com.ripple.base.IBaseDao";
+    private static final String DEFAULT_EXPAND_SERVICE_SUPER_CLASS = "com.ripple.base.IBaseService";
+
     private String daoTargetDir;
     private String daoTargetPackage;
 
@@ -124,7 +127,11 @@ public class MapperPlugin extends PluginAdapter{
             IntrospectedTable introspectedTable) {
         List<GeneratedXmlFile> addGeneratedXmlFiles = new ArrayList<>();
         List<GeneratedXmlFile> generatedXmlFiles = introspectedTable.getGeneratedXmlFiles();
-        if(generatedXmlFiles.size()>0){
+        String keyName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL,introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
+        String packagePath =daoTargetPackage.replaceAll(escapeExprSpecialWord("."),"\\\\");
+        File daoExFile = new File(daoTargetDir+File.separator+packagePath+File.separator+"entity",  keyName + "Ex"+".java");
+
+        if(generatedXmlFiles.size()>0 && !daoExFile.exists()){
             GeneratedXmlFile generatedXmlFile = generatedXmlFiles.get(0);
             Document document = new Document(XmlConstants.MYBATIS3_MAPPER_PUBLIC_ID,XmlConstants.MYBATIS3_MAPPER_SYSTEM_ID);
             XmlElement root =new XmlElement("mapper");
@@ -146,43 +153,145 @@ public class MapperPlugin extends PluginAdapter{
         // 初始化各种路径
         String entityPackage = daoTargetPackage + ".entity.";
         String keyName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL,introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
+        String packagePath =daoTargetPackage.replaceAll(escapeExprSpecialWord("."),"\\\\");
 
-        String[] checkDirs = new String[]{"dao","entity","service"};
+        String[] checkDirs = new String[]{"dao","entity","service","param"};
         for(String checkDir : checkDirs){
             File dir =new File(daoTargetPackage+"."+checkDir);
             dir.mkdirs();
         }
 
-        // 生成entity扩展类
-        String modelExPackage = entityPackage+keyName + "Ex";
-        FullyQualifiedJavaType entitySuperType = new FullyQualifiedJavaType( entityPackage+keyName);
-        TopLevelClass topLevelClass = new TopLevelClass(modelExPackage);
-        topLevelClass.addImportedType(entitySuperType);
-        topLevelClass.setSuperClass(entitySuperType);
-        topLevelClass.setVisibility(JavaVisibility.PUBLIC);
-        topLevelClass.addJavaDocLine("/**");
-        topLevelClass.addJavaDocLine(" * " + introspectedTable.getRemarks() +"[扩展]" );
-        topLevelClass.addJavaDocLine(" * @author " + author );
-        topLevelClass.addJavaDocLine(" */");
-        GeneratedJavaFile modelExFile = new GeneratedJavaFile(topLevelClass, daoTargetDir, javaFormatter);
-        mapperJavaFiles.add(modelExFile);
+        File daoExFile = new File(daoTargetDir+File.separator+packagePath+File.separator+"entity",  keyName + "Ex"+".java");
 
-        // dao类
-        String daoInterfacePackage = daoTargetPackage + ".dao."+keyName+ "DAO";
-        Interface daoInterface = new Interface(daoInterfacePackage);
-        daoInterface.setVisibility(JavaVisibility.PUBLIC);
-        daoInterface.addJavaDocLine("/**");
-        daoInterface.addJavaDocLine(" * " + introspectedTable.getRemarks() );
-        daoInterface.addJavaDocLine(" * @author " + author );
-        daoInterface.addJavaDocLine(" */");
-        FullyQualifiedJavaType daoSuperType = new FullyQualifiedJavaType(expandDaoSuperClass);
-        daoSuperType.addTypeArgument(entitySuperType);
-        daoInterface.addImportedType(entitySuperType);
-        daoInterface.addSuperInterface(daoSuperType);
-        daoInterface.getType().getPackageName();
-        GeneratedJavaFile daoFile = new GeneratedJavaFile(daoInterface, daoTargetDir, javaFormatter);
-        mapperJavaFiles.add(daoFile);
+        if (!daoExFile.exists()|| true) {
+            // 生成entity扩展类
+            String modelExPackage = entityPackage + keyName + "Ex";
+            FullyQualifiedJavaType entitySuperType = new FullyQualifiedJavaType(entityPackage + keyName);
+            TopLevelClass topLevelClass = new TopLevelClass(modelExPackage);
+            topLevelClass.addImportedType(entitySuperType);
+            topLevelClass.setSuperClass(entitySuperType);
+            topLevelClass.setVisibility(JavaVisibility.PUBLIC);
+            topLevelClass.addJavaDocLine("/**");
+            topLevelClass.addJavaDocLine(" * " + introspectedTable.getRemarks() + "[扩展]");
+            topLevelClass.addJavaDocLine(" * @author " + author);
+            topLevelClass.addJavaDocLine(" */");
+            GeneratedJavaFile modelExFile = new GeneratedJavaFile(topLevelClass, daoTargetDir, javaFormatter);
+            mapperJavaFiles.add(modelExFile);
+
+            // 生成param
+            List<GeneratedJavaFile> entityList = introspectedTable.getGeneratedJavaFiles();
+            if(entityList.size()>0){
+                String paramPackage = daoTargetPackage + ".param." + keyName + "Param";
+                TopLevelClass entityItem =(TopLevelClass) entityList.get(0).getCompilationUnit();
+                TopLevelClass paramClass = new TopLevelClass(paramPackage);
+                for(FullyQualifiedJavaType importedType: entityItem.getImportedTypes()){
+                    paramClass.addImportedType(importedType);
+                }
+                for(Field field: entityItem.getFields()) {
+                    FullyQualifiedJavaType StringType = new FullyQualifiedJavaType("String");
+                    Field columnField = new Field("F_" + field.getName(), StringType);
+                    columnField.setVisibility(JavaVisibility.PUBLIC);
+                    columnField.setInitializationString("\""+field.getName()+"\"");
+                    columnField.setStatic(true);
+                    columnField.setFinal(true);
+                    paramClass.addField(columnField);
+                }
+                for(Field field: entityItem.getFields()){
+                    paramClass.addField(field);
+                }
+                for(Method method: entityItem.getMethods()){
+                    if(method.getName().equals("equals")){
+                        continue;
+                    }
+                    paramClass.addMethod(method);
+                }
+                GeneratedJavaFile paramFile = new GeneratedJavaFile(paramClass, daoTargetDir, javaFormatter);
+                mapperJavaFiles.add(paramFile);
+
+                // 生成paramEx
+                String paramExPackage = daoTargetPackage + ".param." + keyName + "ParamEx";
+                TopLevelClass paramExClass = new TopLevelClass(paramExPackage);
+                paramExClass.setSuperClass(paramClass.getType());
+                paramExClass.addImportedType(paramClass.getType());
+                GeneratedJavaFile paramExFile = new GeneratedJavaFile(paramExClass, daoTargetDir, javaFormatter);
+                mapperJavaFiles.add(paramExFile);
+
+            }
+
+
+
+            // dao类
+            String daoInterfacePackage = daoTargetPackage + ".dao."+keyName+ "DAO";
+            Interface daoInterface = new Interface(daoInterfacePackage);
+            daoInterface.setVisibility(JavaVisibility.PUBLIC);
+            daoInterface.addJavaDocLine("/**");
+            daoInterface.addJavaDocLine(" * " + introspectedTable.getRemarks() );
+            daoInterface.addJavaDocLine(" * @author " + author );
+            daoInterface.addJavaDocLine(" */");
+            FullyQualifiedJavaType daoSuperType = new FullyQualifiedJavaType(expandDaoSuperClass);
+            daoSuperType.addTypeArgument(entitySuperType);
+            daoInterface.addImportedType(entitySuperType);
+            daoInterface.addSuperInterface(daoSuperType);
+            daoInterface.getType().getPackageName();
+            GeneratedJavaFile daoFile = new GeneratedJavaFile(daoInterface, daoTargetDir, javaFormatter);
+            mapperJavaFiles.add(daoFile);
+
+            // service
+            String serviceInterfacePackage = daoTargetPackage + ".service.I" + keyName + "Service";
+            Interface serviceInterface = new Interface(serviceInterfacePackage);
+            serviceInterface.setVisibility(JavaVisibility.PUBLIC);
+            serviceInterface.addJavaDocLine("/**");
+            serviceInterface.addJavaDocLine(" * " + introspectedTable.getRemarks());
+            serviceInterface.addJavaDocLine(" * @author " + author);
+            serviceInterface.addJavaDocLine(" */");
+            FullyQualifiedJavaType serviceSuperType = new FullyQualifiedJavaType(DEFAULT_EXPAND_SERVICE_SUPER_CLASS);
+            serviceSuperType.addTypeArgument(daoInterface.getType());
+//            serviceSuperType.addTypeArgument(entitySuperType);
+            serviceInterface.addImportedType(entitySuperType);
+            serviceInterface.addImportedType(daoInterface.getType());
+            serviceInterface.addImportedType(serviceSuperType);
+            serviceInterface.addSuperInterface(serviceSuperType);
+            GeneratedJavaFile serviceFile = new GeneratedJavaFile(serviceInterface, daoTargetDir, javaFormatter);
+            mapperJavaFiles.add(serviceFile);
+
+            // serviceImpl
+            String serviceImplPackage = daoTargetPackage + ".service." + keyName + "ServiceImpl";
+            TopLevelClass serviceImpl = new TopLevelClass(serviceImplPackage);
+            serviceImpl.addImportedType("org.springframework.stereotype.Service");
+            serviceImpl.addImportedType("org.springframework.beans.factory.annotation.Autowired");
+            serviceImpl.addImportedType(serviceInterface.getType());
+            serviceImpl.addImportedType(daoInterface.getType());
+            serviceImpl.addSuperInterface(serviceInterface.getType());
+            serviceImpl.setVisibility(JavaVisibility.PUBLIC);
+            serviceImpl.addJavaDocLine("/**");
+            serviceImpl.addJavaDocLine(" * " + introspectedTable.getRemarks() );
+            serviceImpl.addJavaDocLine(" * @author " + author);
+            serviceImpl.addJavaDocLine(" */");
+            String keyNameMe = keyName.substring(0,1).toLowerCase()+keyName.substring(1)+"Dao";
+
+            Field daoField = new Field(keyNameMe,daoInterface.getType());
+            daoField.setVisibility(JavaVisibility.PRIVATE);
+            daoField.addAnnotation("@Autowired");
+            serviceImpl.addField(daoField);
+
+            serviceImpl.addAnnotation("@Service(\""+ keyName + "ServiceImpl"+"\")");
+            GeneratedJavaFile serviceImplFile = new GeneratedJavaFile(serviceImpl, daoTargetDir, javaFormatter);
+            mapperJavaFiles.add(serviceImplFile);
+
+        }
         return mapperJavaFiles;
+    }
+
+    public static String escapeExprSpecialWord(String keyword) {
+        if (StringUtils.isNotBlank(keyword)) {
+            String[] fbsArr = { "\\", "$", "(", ")", "*", "+", ".", "[", "]", "?", "^", "{", "}", "|" };
+            for (String key : fbsArr) {
+                if (keyword.contains(key)) {
+                    keyword = keyword.replace(key, "\\" + key);
+                }
+            }
+        }
+        return keyword;
     }
 
     @Override
