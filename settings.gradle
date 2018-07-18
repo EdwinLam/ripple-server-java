@@ -1,1 +1,3 @@
 rootProject.name = 'ripple-server-java'
+include 'ripple-server-domain'
+include 'ripple-server-web'
