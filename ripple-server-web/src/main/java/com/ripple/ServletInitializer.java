@@ -1,4 +1,4 @@
-package com.ripple.web.rippleweb;
+package com.ripple;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

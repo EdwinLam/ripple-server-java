@@ -6,3 +6,7 @@ task copy(type: Copy, group: "Custom", description: "Copies sources to the dest 
     from "src"
     into "dest"
 }
+
+dependencies {
+    compile project(':ripple-server-service')
+}

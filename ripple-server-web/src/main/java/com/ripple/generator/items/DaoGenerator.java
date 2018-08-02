@@ -48,7 +48,7 @@ public class DaoGenerator {
         daoInterface.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Select"));
         daoInterface.addImportedType(entityType);
         String baseDaoPackage = generatorConfig.getTargetPackage()+"."+DAO_SUPER_CLASS;
-        FullyQualifiedJavaType daoSuperType = new FullyQualifiedJavaType(baseDaoPackage);
+        FullyQualifiedJavaType daoSuperType = new FullyQualifiedJavaType(daoPackage);
         daoInterface.addImportedType(daoSuperType);
         daoInterface.addSuperInterface(daoSuperType);
         // 类的一些设置
@@ -61,6 +61,6 @@ public class DaoGenerator {
         // 添加方法
         Method  fetchMethod = getFetchMethod(tableName,entityType);
         daoInterface.addMethod(fetchMethod);
-        return new GeneratedJavaFile(daoInterface, generatorConfig.getTargetProject(), generatorConfig.getContext().getJavaFormatter());
+        return new GeneratedJavaFile(daoInterface, generatorConfig.getDaoPath(), generatorConfig.getContext().getJavaFormatter());
     }
 }
