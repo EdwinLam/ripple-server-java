@@ -19,7 +19,7 @@ import org.mybatis.generator.internal.DefaultShellCallback;
  */
 public class StartUp {
 
-    public static void main(String[] args) throws URISyntaxException {
+    public static void main(String[] args) {
         try {
             System.out.println("--------------------start generator-------------------");
             List<String> warnings = new ArrayList<String>();

@@ -20,7 +20,7 @@ public class DaoGenerator {
      * @param returnType
      * @return
      */
-    public Method getFetchMethod(String tableName, FullyQualifiedJavaType returnType){
+    public static Method getFetchMethod(String tableName, FullyQualifiedJavaType returnType){
         Method method = new Method("fetch");
         method.addAnnotation("@Select(\"SELECT * FROM "+tableName+" WHERE id= #{id}\")");
         method.setReturnType(returnType);
@@ -33,13 +33,14 @@ public class DaoGenerator {
     /**
      * 生成Dao文件
      */
-    public GeneratedJavaFile generator(){
-        String tableName = generatorConfig.getIntrospectedTable().getFullyQualifiedTable().getIntrospectedTableName();
+    public static GeneratedJavaFile generator(GeneratorConfig generatorConfig,String tableName){
         String keyName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL,tableName);
-        String entityPackage = generatorConfig.getEntityPackage() +"."+keyName;
-        String daoPackage = generatorConfig.getDaoPackage()+"."+keyName+ "DAO";
+        String[] packageNames = tableName.split("_");
+        String packageNamesStr = String.join(".", packageNames);
+        String domainPackage =  generatorConfig.getDomainPackage() + "."+packageNamesStr +"."+ keyName;
+        String daoPackage = generatorConfig.getDaoPackage() + "."+packageNamesStr +"."+ keyName;
         Interface daoInterface = new Interface(daoPackage);
-        FullyQualifiedJavaType entityType = new FullyQualifiedJavaType(entityPackage);
+        FullyQualifiedJavaType entityType = new FullyQualifiedJavaType(domainPackage);
         // 设置导入的类
         daoInterface.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Insert"));
         daoInterface.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Mapper"));

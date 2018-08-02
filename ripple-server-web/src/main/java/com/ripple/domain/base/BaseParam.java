@@ -1,4 +1,4 @@
-package com.ripple.base;
+package com.ripple.domain.base;
 
 import java.io.Serializable;
 
