@@ -1,7 +1,6 @@
 package com.ripple.controller;
 
-import com.ripple.dao.IAccountDAO;
-import com.ripple.dao.IAccountExDAO;
+import com.ripple.dao.account.IAccountDAO;
 import com.ripple.domain.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/user")
 public class AccountController {
     @Autowired
-    private IAccountExDAO accountExDAO;
+    private IAccountDAO accountDAO;
 
     @ResponseBody
     @RequestMapping(value = "/test")
     public Account queryStudyResume(long id) {
-        return accountExDAO.test(id);
+        return accountDAO.fetch(id);
     }
 }

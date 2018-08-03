@@ -39,6 +39,7 @@
             <property name="rootClass" value="com.ripple.domain.BaseDomain"/>
         </javaModelGenerator>
 
+
         <!--生成映射文件存放位置-->
         <sqlMapGenerator targetPackage="com.ripple.dao" targetProject="ripple-server">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->

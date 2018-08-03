@@ -14,6 +14,8 @@ public class GeneratorConfig {
     private String domainPackage;
     private String daoPackage;
     private String servicePackage;
+
+    private String xmlPath;
     private String paramPath;
     private String domainPath;
     private String daoPath;
@@ -35,6 +37,7 @@ public class GeneratorConfig {
         this.paramPackage = targetPackage+".param";
         this.daoPackage = targetPackage+".dao";
         this.servicePath = targetPackage+".service";
+        this.xmlPath = targetProject +"-service/src/main/resources/mybatis";
         this.author = author;
     }
 
@@ -148,5 +151,13 @@ public class GeneratorConfig {
 
     public void setServicePackage(String servicePackage) {
         this.servicePackage = servicePackage;
+    }
+
+    public String getXmlPath() {
+        return xmlPath;
+    }
+
+    public void setXmlPath(String xmlPath) {
+        this.xmlPath = xmlPath;
     }
 }

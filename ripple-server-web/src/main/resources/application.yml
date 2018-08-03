@@ -34,8 +34,8 @@ spring:
           max-pool-prepared-statement-per-connection-size: 20
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.winterchen.model
+  mapper-locations: classpath*:mybatis/**/*DAO.xml
+  type-aliases-package: com.ripple.domain
 
 #pagehelper
 pagehelper:

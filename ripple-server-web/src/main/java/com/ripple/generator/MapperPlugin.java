@@ -10,6 +10,7 @@ import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
+import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.XmlConstants;
 import org.mybatis.generator.config.CommentGeneratorConfiguration;
@@ -80,8 +81,8 @@ public class MapperPlugin extends PluginAdapter {
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
 
-//        //创建Select查询
-        XmlElement select = new XmlElement("select");
+////        //创建Select查询
+//        XmlElement select = new XmlElement("select");
 //        select.addAttribute(new Attribute("id", "selectAll"));
 //        select.addAttribute(new Attribute("resultMap", "BaseResultMap"));
 //        select.addAttribute(new Attribute("parameterType", introspectedTable.getBaseRecordType()));
@@ -92,12 +93,12 @@ public class MapperPlugin extends PluginAdapter {
 //        queryPage.addAttribute(new Attribute("resultMap", "BaseResultMap"));
 //        queryPage.addAttribute(new Attribute("parameterType", "com.fendo.bean.Page"));
 //        queryPage.addElement(new TextElement("select * from "+ introspectedTable.getFullyQualifiedTableNameAtRuntime()));
+////
+//        XmlElement parentElement = document.getRootElement();
+//        List<Attribute> attributes = parentElement.getAttributes();
+//        Attribute ele = attributes.get(0);
 //
-        XmlElement parentElement = document.getRootElement();
-        List<Attribute> attributes = parentElement.getAttributes();
-        Attribute ele = attributes.get(0);
-
-        Document documentEx = new Document(document.getPublicId(), document.getSystemId());
+//        Document documentEx = new Document(document.getPublicId(), document.getSystemId());
 //        parentElement.addElement(select);
 //        parentElement.addElement(queryPage);
         return super.sqlMapDocumentGenerated(document, introspectedTable);
@@ -106,8 +107,51 @@ public class MapperPlugin extends PluginAdapter {
     @Override
     public List<GeneratedXmlFile> contextGenerateAdditionalXmlFiles(
             IntrospectedTable introspectedTable) {
+        String tableName = introspectedTable.getFullyQualifiedTable().getIntrospectedTableName();
+        String keyName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName);
         List<GeneratedXmlFile> addGeneratedXmlFiles = new ArrayList<>();
-//        List<GeneratedXmlFile> generatedXmlFiles = introspectedTable.getGeneratedXmlFiles();
+        List<GeneratedXmlFile> generatedXmlFiles = introspectedTable.getGeneratedXmlFiles();
+
+        String[] packageNames = tableName.split("_");
+        String packageNamesStr = String.join(".", packageNames);
+        String pathStr = String.join("/", packageNames);
+
+        String xmlPackage = generatorConfig.getDaoPackage() + "."+packageNamesStr ;
+
+        if(generatedXmlFiles.size()>0){
+            //创建fetch
+            XmlElement fetchElement = new XmlElement("select");
+            fetchElement.addAttribute(new Attribute("id", "fetch"));
+            fetchElement.addAttribute(new Attribute("resultMap", "BaseResultMap"));
+            fetchElement.addAttribute(new Attribute("parameterType", introspectedTable.getBaseRecordType()));
+            fetchElement.addElement(new TextElement("select * from "+ introspectedTable.getFullyQualifiedTableNameAtRuntime()));
+
+
+            Document document = new Document(XmlConstants.MYBATIS3_MAPPER_PUBLIC_ID,XmlConstants.MYBATIS3_MAPPER_SYSTEM_ID);
+            XmlElement root =new XmlElement("mapper");
+            context.getCommentGenerator().addRootComment(root);
+            String createPath = generatorConfig.getXmlPath()+"/"+pathStr;
+            File dir =new File(generatorConfig.getXmlPath()+"/"+pathStr);
+            dir.mkdirs();
+            Attribute attribute = new Attribute("namespace", generatorConfig.getDaoPackage() + "."+packageNamesStr+"."+"I"+keyName+"DAO" );
+            root.addAttribute(attribute);
+            root.addElement(fetchElement);
+            document.setRootElement(root);
+            GeneratedXmlFile generatedXmlFileEx = new GeneratedXmlFile(document, keyName+"DAO.xml",introspectedTable.getMyBatis3XmlMapperPackage(),createPath, false,
+                    introspectedTable.getContext().getXmlFormatter());
+            addGeneratedXmlFiles.add(generatedXmlFileEx);
+
+            // exhtml
+             document = new Document(XmlConstants.MYBATIS3_MAPPER_PUBLIC_ID,XmlConstants.MYBATIS3_MAPPER_SYSTEM_ID);
+            root =new XmlElement("mapper");
+            root.addAttribute(attribute);
+            root.addElement(new TextElement("<!--该xml用于编写自定义方法-->"));
+            document.setRootElement(root);
+            GeneratedXmlFile generatedXmlFileEx2 = new GeneratedXmlFile(document, keyName+"ExDAO.xml",introspectedTable.getMyBatis3XmlMapperPackage(),createPath, false,
+                    introspectedTable.getContext().getXmlFormatter());
+            addGeneratedXmlFiles.add(generatedXmlFileEx2);
+
+        }
 //        String keyName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL,introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
 //        String packagePath =daoTargetPackage.replaceAll(escapeExprSpecialWord("."),"\\\\");
 //        File daoExFile = new File(daoTargetDir+File.separator+packagePath+File.separator+"entity",  keyName + "Ex"+".java");
