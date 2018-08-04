@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ripple.dao.account.IAccountDAO">
+  <sql id="Base_Column_List">
+    accountName,createAt,updateAt,createUid,updateUid,status
+  </sql>
+  <!--根据id获取对象-->
   <select id="fetch" parameterType="java.util.Map" resultType="com.ripple.domain.account.Account">
-    select id,accountName from account
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where id=#{id} 
+  </select>
+
+  <select id="findOne" parameterType="java.util.Map" resultType="com.ripple.domain.account.Account">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM xjda_base_info WHERE
+    <trim prefix="WHERE" prefixOverrides="AND | OR">
+      <foreach collection="conditions" item="c1">
+        <if test="children1.children.size()>0">
+          <foreach collection="children1" item="children2">
+
+          </foreach>
+        </if>
+      </foreach>
+    </trim>
+    LIMIT 0,1
   </select>
 </mapper>

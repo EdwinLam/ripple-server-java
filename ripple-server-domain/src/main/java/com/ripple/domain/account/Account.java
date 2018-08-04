@@ -2,9 +2,7 @@ package com.ripple.domain.account;
 
 import com.ripple.domain.BaseDomain;
 
-import java.io.Serializable;
-
-public class Account extends BaseDomain  {
+public class Account extends BaseDomain {
     //账号名称
     private String accountName;
 
