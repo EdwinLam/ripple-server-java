@@ -43,22 +43,44 @@ allprojects {
     }
     dependencies {
         compile('org.springframework.boot:spring-boot-starter-web')
-        compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2')
-        compile('org.mybatis.generator:mybatis-generator-maven-plugin:1.3.2')
+        compile('org.springframework.boot:spring-boot-starter-security')
+        compile('org.springframework.boot:spring-boot-starter-aop')
+        compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+        compile('org.springframework.boot:spring-boot-starter-actuator')
+
         runtime('mysql:mysql-connector-java')
         providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-        testCompile('org.springframework.boot:spring-boot-starter-test')
-        // https://mvnrepository.com/artifact/com.alibaba/fastjson
-        compile group: 'com.alibaba', name: 'fastjson', version: '1.2.47'
-
-        //mybatis-generator
-        // https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core
-        compile group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: '1.3.6'
-        compile ('com.google.guava:guava:21.0')
-        compile group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.10'
-        compile ('com.github.pagehelper:pagehelper-spring-boot-starter:1.2.3')
-        compile project(':ripple-server-domain')
+        compile project(':ripple-server-entity')
         compile fileTree(dir: 'libs', include: ['*.jar'])
+        // 数据库连接池
+        compile('com.alibaba:druid:1.1.4')
+        // Mysql Connector
+//        compile('mysql:mysql-connector-java:5.1.44')
+        // JWT
+        compile('io.jsonwebtoken:jjwt:0.9.0')
+        // JPA
+        compile('org.springframework.boot:spring-boot-starter-data-jpa')
+        // MybatisPlus
+        compile('com.baomidou:mybatis-plus-boot-starter:2.2.0')
+        // Redis
+        compile('org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE')
+        // Swagger API文档
+        compile('io.springfox:springfox-swagger-ui:2.7.0')
+        compile('io.springfox:springfox-swagger2:2.7.0')
+        // Hutool工具包
+        compile('cn.hutool:hutool-all:4.0.5')
+        // Gson
+        compile('com.google.code.gson:gson:2.8.2')
+        // 七牛图片上传SDK
+        compile('com.qiniu:qiniu-java-sdk:[7.2.0, 7.2.99]')
+        // Lombok
+        compile('org.projectlombok:lombok:1.16.20')
+        // Jasypt加密
+        compile('com.github.ulisesbocchio:jasypt-spring-boot-starter:1.18')
+        // Beet代码生成
+        compile('com.ibeetl:beetl:2.8.3')
+        // 热更新
+        compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
     }
 }
 
