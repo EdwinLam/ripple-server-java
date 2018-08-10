@@ -32,10 +32,10 @@ import java.util.List;
 @Component
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    @Value("${xboot.tokenExpireTime}")
+    @Value("${ripple.tokenExpireTime}")
     private Integer tokenExpireTime;
 
-    @Value("${xboot.saveLoginTime}")
+    @Value("${ripple.saveLoginTime}")
     private Integer saveLoginTime;
 
     @Override
