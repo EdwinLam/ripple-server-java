@@ -50,7 +50,6 @@ allprojects {
 
         runtime('mysql:mysql-connector-java')
         providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-        compile project(':ripple-server-entity')
         compile fileTree(dir: 'libs', include: ['*.jar'])
         // 数据库连接池
         compile('com.alibaba:druid:1.1.4')
@@ -82,59 +81,4 @@ allprojects {
         // 热更新
         compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
     }
-}
-
-
-/** 子项目配置 */
-subprojects {
-    dependencies {
-        // 加载libs目录下所有的jar
-        compile fileTree(dir: 'libs', include: ['*.jar'])
-    }
-
-    //生成源码jar
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
-    artifacts {
-        archives jar
-        archives sourcesJar
-    }
-
-    /** 有时候会报错，但需要执行 */
-    task createREADME() {
-        file("README.md").createNewFile()
-    }
-
-    //上传maven仓库
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                snapshotRepository(url: "http://repo.qtonecloud.cn/content/repositories/snapshots/") {
-                    authentication(userName: "deployment", password: "jlusoft!123")
-                }
-                repository(url: "http://repo.qtonecloud.cn/content/repositories/releases/") {
-                    authentication(userName: "deployment", password: "jlusoft!123")
-                }
-            }
-        }
-    }
-
-
-}
-
-
-configurations {
-    providedRuntime
-    mybatisGenerator
-}
-
-
-
-// mybatis-generator.xml 配置路径
-mybatisGenerator {
-    verbose = true
-    configFile = 'src/main/resources/mybatis/generator.xml'
 }
