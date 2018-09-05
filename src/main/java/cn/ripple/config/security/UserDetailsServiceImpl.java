@@ -2,6 +2,8 @@ package cn.ripple.config.security;
 
 import cn.hutool.core.util.StrUtil;
 import cn.ripple.common.exception.LoginFailLimitException;
+import cn.ripple.entity.User;
+import cn.ripple.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +26,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+    @Autowired
+    private UserService userService;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -34,8 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             //超过限制次数
             throw new LoginFailLimitException("登录错误次数超过限制，请"+loginAfterTime+"分钟后再试");
         }
-//        User user = userService.findByUsername(username);
-//        return new SecurityUserDetails(user);
-        return null;
+        User user = userService.findByUsername(username);
+        return new SecurityUserDetails(user);
     }
 }

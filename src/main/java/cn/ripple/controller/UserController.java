@@ -1,12 +1,10 @@
 package cn.ripple.controller;
 
-import cn.ripple.common.vo.SearchVo;
-import cn.ripple.controller.BaseController;
 import cn.ripple.common.utils.PageUtil;
 import cn.ripple.common.utils.ResultUtil;
 import cn.ripple.common.vo.PageVo;
 import cn.ripple.common.vo.Result;
-import cn.ripple.entity.Role;
+import cn.ripple.common.vo.SearchVo;
 import cn.ripple.entity.User;
 import cn.ripple.service.UserService;
 import io.swagger.annotations.Api;
@@ -14,9 +12,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**

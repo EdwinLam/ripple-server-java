@@ -2,6 +2,8 @@ package cn.ripple.config.security.permission;
 
 
 import cn.hutool.core.util.StrUtil;
+import cn.ripple.entity.Permission;
+import cn.ripple.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -23,8 +25,8 @@ import java.util.*;
 @Component
 public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
-//    @Autowired
-//    private PermissionService permissionService;
+    @Autowired
+    private PermissionService permissionService;
 
     private Map<String, Collection<ConfigAttribute>> map = null;
 
@@ -36,15 +38,15 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         map = new HashMap<>(16);
         Collection<ConfigAttribute> configAttributes;
         ConfigAttribute cfg;
-//        List<Permission> permissions = permissionService.getAll();
-//        for(Permission permission : permissions) {
-//            configAttributes = new ArrayList<>();
-//            cfg = new SecurityConfig(permission.getTitle());
-//            //作为MyAccessDecisionManager类的decide的第三个参数
-//            configAttributes.add(cfg);
-//            //用权限的path作为map的key，用ConfigAttribute的集合作为value
-//            map.put(permission.getPath(), configAttributes);
-//        }
+        List<Permission> permissions = permissionService.getAll();
+        for(Permission permission : permissions) {
+            configAttributes = new ArrayList<>();
+            cfg = new SecurityConfig(permission.getTitle());
+            //作为MyAccessDecisionManager类的decide的第三个参数
+            configAttributes.add(cfg);
+            //用权限的path作为map的key，用ConfigAttribute的集合作为value
+            map.put(permission.getPath(), configAttributes);
+        }
 
     }
 

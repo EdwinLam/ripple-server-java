@@ -2,8 +2,13 @@ package cn.ripple.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.ripple.common.constant.CommonConstant;
 import cn.ripple.common.vo.SearchVo;
 import cn.ripple.dao.UserDao;
+import cn.ripple.dao.mapper.PermissionMapper;
+import cn.ripple.dao.mapper.UserRoleMapper;
+import cn.ripple.entity.Permission;
+import cn.ripple.entity.Role;
 import cn.ripple.entity.User;
 import cn.ripple.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,9 +37,30 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private UserRoleMapper userRoleMapper;
+
+    @Autowired
+    private PermissionMapper permissionMapper;
+
     @Override
     public UserDao getRepository() {
         return userDao;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+
+        List<User> list=userDao.findByUsernameAndStatus(username, CommonConstant.USER_STATUS_NORMAL);
+        if(list!=null&&list.size()>0){
+            User user = list.get(0);
+            List<Role> roleList = userRoleMapper.findByUserId(user.getId());
+            user.setRoles(roleList);
+            List<Permission> permissionList = permissionMapper.findByUserId(user.getId());
+            user.setPermissions(permissionList);
+            return user;
+        }
+        return null;
     }
 
     @Override

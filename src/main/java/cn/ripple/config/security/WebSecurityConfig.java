@@ -68,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/xboot/common/needLogin")
                 //登录需要经过的url请求
-                .loginProcessingUrl("/xboot/login")
+                .loginProcessingUrl("/ripple/login")
                 .permitAll()
                 //成功处理类
                 .successHandler(successHandler)
