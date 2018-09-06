@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.web.cors.CorsUtils;
 
 /**
  * Security 核心配置类
@@ -79,12 +80,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()//就是这一行
                 //任何请求
                 .anyRequest()
                 //需要身份认证
                 .authenticated()
                 .and()
                 //关闭跨站请求防护
+                .cors()//跨域
+                .and()
                 .csrf().disable()
                 //前后端分离采用JWT 不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
