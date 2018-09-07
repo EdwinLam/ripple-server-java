@@ -3,6 +3,7 @@ package cn.ripple.config.security.jwt;
 
 import cn.hutool.core.util.StrUtil;
 import cn.ripple.common.constant.SecurityConstant;
+import cn.ripple.common.enums.ResponseCodeEnum;
 import cn.ripple.common.exception.RippleException;
 import cn.ripple.common.utils.ResponseUtil;
 import com.google.gson.Gson;
@@ -91,7 +92,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             } catch (ExpiredJwtException e) {
                 throw new RippleException("登录已失效，请重新登录");
             } catch (Exception e){
-                ResponseUtil.out(response, ResponseUtil.resultMap(false,500,"解析token错误"));
+                ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.TOKEN_TIME_OUT.getValue(),"解析token错误"));
             }
         }
         return null;

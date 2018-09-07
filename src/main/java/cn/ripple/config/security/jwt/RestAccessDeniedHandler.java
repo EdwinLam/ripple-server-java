@@ -1,6 +1,7 @@
 package cn.ripple.config.security.jwt;
 
 
+import cn.ripple.common.enums.ResponseCodeEnum;
 import cn.ripple.common.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
@@ -20,7 +21,7 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
             throws IOException, ServletException {
 
-        ResponseUtil.out(response,ResponseUtil.resultMap(false,403,"您没有权限"));
+        ResponseUtil.out(response,ResponseUtil.resultMap(false,ResponseCodeEnum.ACCESS_DENY.getValue(),"您没有权限"));
     }
 
 }

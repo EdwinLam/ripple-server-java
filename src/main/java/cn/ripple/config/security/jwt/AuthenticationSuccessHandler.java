@@ -4,6 +4,7 @@ package cn.ripple.config.security.jwt;
 import cn.hutool.core.util.StrUtil;
 import cn.ripple.common.annotation.SystemLog;
 import cn.ripple.common.constant.SecurityConstant;
+import cn.ripple.common.enums.ResponseCodeEnum;
 import cn.ripple.common.utils.ResponseUtil;
 import com.google.gson.Gson;
 import io.jsonwebtoken.Jwts;
@@ -64,6 +65,6 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         Map<String,Object> data = new HashMap<>();
 //        data.put("userInfo",authentication.getPrincipal());
         data.put("token",SecurityConstant.TOKEN_SPLIT + token);
-        ResponseUtil.out(response, ResponseUtil.resultMap(true,200,"登录成功", data));
+        ResponseUtil.out(response, ResponseUtil.resultMap(true, ResponseCodeEnum.SUCCESS.getValue(),"登录成功", data));
     }
 }
