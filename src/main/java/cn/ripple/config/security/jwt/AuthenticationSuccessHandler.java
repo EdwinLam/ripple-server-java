@@ -20,13 +20,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 登录成功处理类
- * @author Exrickx
  */
 @Slf4j
 @Component
@@ -64,8 +61,9 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
                 //签名算法和密钥
                 .signWith(SignatureAlgorithm.HS512, SecurityConstant.JWT_SIGN_KEY)
                 .compact();
-        token = SecurityConstant.TOKEN_SPLIT + token;
-
-        ResponseUtil.out(response, ResponseUtil.resultMap(true,200,"登录成功", token));
+        Map<String,Object> data = new HashMap<>();
+//        data.put("userInfo",authentication.getPrincipal());
+        data.put("token",SecurityConstant.TOKEN_SPLIT + token);
+        ResponseUtil.out(response, ResponseUtil.resultMap(true,200,"登录成功", data));
     }
 }

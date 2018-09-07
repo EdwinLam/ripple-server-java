@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * @author Exrickx
- */
 @Component
 @Slf4j
 public class RestAccessDeniedHandler implements AccessDeniedHandler {

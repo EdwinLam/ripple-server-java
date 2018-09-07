@@ -12,10 +12,15 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 
 /**
@@ -29,6 +34,9 @@ public class UserController extends BaseController<User, String>{
 
     @Autowired
     private UserService userService;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public UserService getService() {
@@ -48,6 +56,17 @@ public class UserController extends BaseController<User, String>{
             u.setPassword(null);
         }
         return new ResultUtil<Page<User>>().setData(page);
+    }
+
+    @RequestMapping(value = "/info",method = RequestMethod.GET)
+    @ApiOperation(value = "获取当前登录用户接口")
+    public Result<User> getUserInfo(){
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User u = userService.findByUsername(user.getUsername());
+        // 清除持久上下文环境 避免后面语句导致持久化
+        entityManager.clear();
+        u.setPassword(null);
+        return new ResultUtil<User>().setData(u);
     }
 
 }
