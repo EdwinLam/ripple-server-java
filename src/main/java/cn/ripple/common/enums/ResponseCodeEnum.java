@@ -4,21 +4,21 @@ package cn.ripple.common.enums;
  * 服务器响应code
  */
 public enum  ResponseCodeEnum {
-    SUCCESS("1000", "成功"),
-    BUSINESS_ERRO("4000",""),
-    TOKEN_TIME_OUT("2000", "token超时"),
-    ACCESS_DENY("2001", "没有权限访问"),
-    CODE_901("901", "需要弹窗显示的错误");
+    SUCCESS(200, "成功"),
+    SYSTEM_ERROR(500,"系统错误"),
+    ACCESS_DENY(403, "没有权限访问"),
+    BUSINESS_ERROR(1001,"业务错误"),
+    TOKEN_TIME_OUT(1003, "token超时");
 
-    ResponseCodeEnum(String value, String name) {
+    ResponseCodeEnum(Integer value, String name) {
         this.value = value;
         this.name = name;
     }
 
-    private final String value;
+    private final Integer value;
     private final String name;
 
-    public String getValue() {
+    public Integer getValue() {
         return value;
     }
 
@@ -26,7 +26,7 @@ public enum  ResponseCodeEnum {
         return name;
     }
 
-    public static String getNameByValue(String value) {
+    public static String getNameByValue(Integer value) {
         ResponseCodeEnum[] types = ResponseCodeEnum.values();
         for (int i = 0; i < types.length; i++) {
             if (types[i].getValue() == value)

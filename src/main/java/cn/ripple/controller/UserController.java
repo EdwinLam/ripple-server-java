@@ -68,5 +68,4 @@ public class UserController extends BaseController<User, String>{
         u.setPassword(null);
         return new ResultUtil<User>().setData(u);
     }
-
 }

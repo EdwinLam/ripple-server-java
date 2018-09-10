@@ -14,14 +14,14 @@ import java.util.List;
  * 用户接口
  * @author Edwin
  */
-@CacheConfig(cacheNames = "user")
+//@CacheConfig(cacheNames = "user")
 public interface UserService extends BaseService<User,String> {
     /**
      * 通过用户名获取用户
      * @param username
      * @return
      */
-    @Cacheable(key = "#username")
+//    @Cacheable(key = "#username")
     User findByUsername(String username);
 
     /**

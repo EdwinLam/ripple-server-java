@@ -18,9 +18,7 @@ import java.io.IOException;
 public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
-            throws IOException, ServletException {
-
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
         ResponseUtil.out(response,ResponseUtil.resultMap(false,ResponseCodeEnum.ACCESS_DENY.getValue(),"您没有权限"));
     }
 

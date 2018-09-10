@@ -51,15 +51,14 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
             int loginFailTime = Integer.parseInt(value);
             int restLoginTime = loginTimeLimit - loginFailTime;
             log.info("用户"+username+"登录失败，还有"+restLoginTime+"次机会");
-            throw new BizException(ResponseCodeEnum.CODE_901.getValue(), "暂无本学段学生档案");
-//            ResponseUtil.out(response, ResponseUtil.resultMap(false,500,"用户名或密码错误"));
+            ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.BUSINESS_ERROR.getValue(),"用户名或密码错误"));
         } else if (e instanceof DisabledException) {
 
-            ResponseUtil.out(response, ResponseUtil.resultMap(false,"500","账户被禁用，请联系管理员"));
+            ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.BUSINESS_ERROR.getValue(),"账户被禁用，请联系管理员"));
         } else if (e instanceof LoginFailLimitException){
-            ResponseUtil.out(response, ResponseUtil.resultMap(false,"500",((LoginFailLimitException) e).getMsg()));
+            ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.BUSINESS_ERROR.getValue(),((LoginFailLimitException) e).getMsg()));
         } else {
-            ResponseUtil.out(response, ResponseUtil.resultMap(false,"500","登录失败"));
+            ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.BUSINESS_ERROR.getValue(),"登录失败"));
         }
     }
 
