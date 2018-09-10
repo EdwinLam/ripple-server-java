@@ -37,7 +37,7 @@ public class ResponseUtil {
         }
     }
 
-    public static Map<String, Object> resultMap(boolean flag, Integer code, String msg){
+    public static Map<String, Object> resultMap(boolean flag, String code, String msg){
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("success", flag);
@@ -47,7 +47,7 @@ public class ResponseUtil {
         return resultMap;
     }
 
-    public static Map<String, Object> resultMap(boolean flag, Integer code, String msg, Object data){
+    public static Map<String, Object> resultMap(boolean flag, String code, String msg, Object data){
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("success", flag);
