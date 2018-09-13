@@ -23,4 +23,10 @@ public interface IUserRoleService extends IService<UserRole> {
      */
     @Cacheable(key = "#userId")
     List<Role> findByUserId(@Param("userId") String userId);
+
+    /**
+     * 删除用户角色
+     * @param userId
+     */
+    void deleteByUserId(String userId);
 }

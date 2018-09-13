@@ -5,22 +5,26 @@ import cn.ripple.common.utils.ResultUtil;
 import cn.ripple.common.vo.PageVo;
 import cn.ripple.common.vo.Result;
 import cn.ripple.common.vo.SearchVo;
+import cn.ripple.entity.Role;
 import cn.ripple.entity.User;
+import cn.ripple.entity.UserRole;
+import cn.ripple.service.RoleService;
 import cn.ripple.service.UserService;
+import cn.ripple.service.mybatis.IUserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 
 /**
@@ -35,8 +39,20 @@ public class UserController extends BaseController<User, String>{
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private IUserRoleService userRoleService;
+
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private IUserRoleService iUserRoleService;
+
+    @Autowired
+    private UserRoleService userRoleService;
 
     @Override
     public UserService getService() {
@@ -51,11 +67,56 @@ public class UserController extends BaseController<User, String>{
 
         Page<User> page = userService.findByCondition(user, searchVo, PageUtil.initPage(pageVo));
         for(User u: page.getContent()){
-//            List<Role> list = iUserRoleService.findByUserId(u.getId());
-//            u.setRoles(list);
+            List<Role> list = userRoleService.findByUserId(u.getId());
+            u.setRoles(list);
             u.setPassword(null);
         }
         return new ResultUtil<Page<User>>().setData(page);
+    }
+
+
+    /**
+     * @param u
+     * @param roles
+     * @return
+     */
+    @RequestMapping(value = "/admin/edit",method = RequestMethod.POST)
+    @ApiOperation(value = "修改资料",notes = "需要通过id获取原用户信息 需要username更新缓存")
+    @CacheEvict(key = "#u.username")
+    public Result<Object> edit(@ModelAttribute User u,
+                               @RequestParam(required = false) String[] roles){
+        User old = userService.get(u.getId());
+        //所修改了用户名
+        if(!old.getUsername().equals(u.getUsername())){
+            //若修改用户名删除原用户名缓存
+            redisTemplate.delete("user::"+old.getUsername());
+            //判断新用户名是否存在
+            if(userService.findByUsername(u.getUsername())!=null){
+                return new ResultUtil<Object>().setErrorMsg("该用户名已被存在");
+            }
+            //删除缓存
+            redisTemplate.delete("user::"+u.getUsername());
+        }
+
+        u.setPassword(old.getPassword());
+        User user=userService.update(u);
+        if(user==null){
+            return new ResultUtil<Object>().setErrorMsg("修改失败");
+        }
+        //删除该用户角色
+        userRoleService.deleteByUserId(u.getId());
+        if(roles!=null&&roles.length>0){
+            //新角色
+            for(String roleId : roles){
+                UserRole ur = new UserRole();
+                ur.setRoleId(roleId);
+                ur.setUserId(u.getId());
+                userRoleService.save(ur);
+            }
+        }
+        //手动删除缓存
+        redisTemplate.delete("userRole::"+u.getId());
+        return new ResultUtil<Object>().setSuccessMsg("修改成功");
     }
 
     @RequestMapping(value = "/info",method = RequestMethod.GET)

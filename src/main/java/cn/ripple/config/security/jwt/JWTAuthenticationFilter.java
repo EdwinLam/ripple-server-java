@@ -90,7 +90,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     return new UsernamePasswordAuthenticationToken(principal, null, authorities);
                 }
             } catch (ExpiredJwtException e) {
-                throw new RippleException("登录已失效，请重新登录");
+                ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.TOKEN_TIME_OUT.getValue(),"解析token错误"));
             } catch (Exception e){
                 ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.TOKEN_TIME_OUT.getValue(),"解析token错误"));
             }
