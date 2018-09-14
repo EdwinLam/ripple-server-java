@@ -9,12 +9,14 @@ import cn.ripple.entity.Role;
 import cn.ripple.entity.User;
 import cn.ripple.entity.UserRole;
 import cn.ripple.service.RoleService;
+import cn.ripple.service.UserRoleService;
 import cn.ripple.service.UserService;
 import cn.ripple.service.mybatis.IUserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -34,13 +37,15 @@ import java.util.List;
 @RestController
 @Api(description = "用户管理接口")
 @RequestMapping("/ripple/user")
+@CacheConfig(cacheNames = "user")
+@Transactional
 public class UserController extends BaseController<User, String>{
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private IUserRoleService userRoleService;
+    private UserRoleService userRoleService;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -51,8 +56,6 @@ public class UserController extends BaseController<User, String>{
     @Autowired
     private IUserRoleService iUserRoleService;
 
-    @Autowired
-    private UserRoleService userRoleService;
 
     @Override
     public UserService getService() {
@@ -67,7 +70,7 @@ public class UserController extends BaseController<User, String>{
 
         Page<User> page = userService.findByCondition(user, searchVo, PageUtil.initPage(pageVo));
         for(User u: page.getContent()){
-            List<Role> list = userRoleService.findByUserId(u.getId());
+            List<Role> list = iUserRoleService.findByUserId(u.getId());
             u.setRoles(list);
             u.setPassword(null);
         }
@@ -86,6 +89,9 @@ public class UserController extends BaseController<User, String>{
     public Result<Object> edit(@ModelAttribute User u,
                                @RequestParam(required = false) String[] roles){
         User old = userService.get(u.getId());
+        // 密码为空则使用旧密码
+        if(u.getPassword().equals(""))
+            u.setPassword(old.getPassword());
         //所修改了用户名
         if(!old.getUsername().equals(u.getUsername())){
             //若修改用户名删除原用户名缓存

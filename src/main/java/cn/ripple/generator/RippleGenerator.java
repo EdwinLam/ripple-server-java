@@ -20,7 +20,7 @@ public class RippleGenerator {
      * 实体类名
      * 建议仅需修改
      */
-    private static final String className = "User";
+    private static final String className = "UserRole";
 
     /**
      * 类说明描述
