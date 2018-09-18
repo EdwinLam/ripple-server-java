@@ -55,14 +55,14 @@ public class UploadController {
             //上传七牛云服务器
             imagePath= qiniuUtil.qiniuInputStreamUpload(inputStream,fileName);
             if(StrUtil.isBlank(imagePath)){
-                return new ResultUtil<Object>().setErrorMsg("上传失败，请检查七牛云配置");
+                return new ResultUtil<>().setErrorMsg("上传失败，请检查七牛云配置");
             }
             if(imagePath.contains("error")){
-                return new ResultUtil<Object>().setErrorMsg(imagePath);
+                return new ResultUtil<>().setErrorMsg(imagePath);
             }
         } catch (Exception e) {
             log.error(e.toString());
-            return new ResultUtil<Object>().setErrorMsg(e.toString());
+            return new ResultUtil<>().setErrorMsg(e.toString());
         }
 
         return new ResultUtil<Object>().setData(imagePath);

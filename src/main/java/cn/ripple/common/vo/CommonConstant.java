@@ -85,4 +85,9 @@ public interface CommonConstant {
      * 3级菜单
      */
     Integer LEVEL_THREE = 3;
+
+    /**
+     * 1级菜单
+     */
+    String PARENT_ID = "0";
 }

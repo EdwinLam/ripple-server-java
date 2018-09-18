@@ -1,5 +1,6 @@
 package cn.ripple.controller;
 
+import cn.hutool.core.util.StrUtil;
 import cn.ripple.common.utils.PageUtil;
 import cn.ripple.common.utils.ResultUtil;
 import cn.ripple.common.vo.PageVo;
@@ -22,6 +23,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -123,6 +125,40 @@ public class UserController extends BaseController<User, String>{
         //手动删除缓存
         redisTemplate.delete("userRole::"+u.getId());
         return new ResultUtil<Object>().setSuccessMsg("修改成功");
+    }
+
+    @RequestMapping(value = "/admin/add",method = RequestMethod.POST)
+    @ApiOperation(value = "添加用户")
+    public Result<Object> add(@ModelAttribute User u,
+                                 @RequestParam(required = false) String[] roles){
+
+        if(StrUtil.isBlank(u.getUsername()) || StrUtil.isBlank(u.getPassword())){
+            return new ResultUtil<>().setErrorMsg("缺少必需表单字段");
+        }
+
+        if(userService.findByUsername(u.getUsername())!=null){
+            return new ResultUtil<>().setErrorMsg("该用户名已被注册");
+        }
+        //删除缓存
+        redisTemplate.delete("user::"+u.getUsername());
+
+        String encryptPass = new BCryptPasswordEncoder().encode(u.getPassword());
+        u.setPassword(encryptPass);
+        User user=userService.save(u);
+        if(user==null){
+            return new ResultUtil<>().setErrorMsg("添加失败");
+        }
+        if(roles!=null&&roles.length>0){
+            //添加角色
+            for(String roleId : roles){
+                UserRole ur = new UserRole();
+                ur.setUserId(u.getId());
+                ur.setRoleId(roleId);
+                userRoleService.save(ur);
+            }
+        }
+
+        return new ResultUtil<>().setData(user);
     }
 
     @RequestMapping(value = "/info",method = RequestMethod.GET)
