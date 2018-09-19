@@ -74,7 +74,7 @@ public class UserController extends BaseController<User, String>{
         for(User u: page.getContent()){
             List<Role> list = iUserRoleService.findByUserId(u.getId());
             u.setRoles(list);
-            u.setPassword(null);
+//            u.setPassword(null);
         }
         return new ResultUtil<Page<User>>().setData(page);
     }
@@ -168,7 +168,7 @@ public class UserController extends BaseController<User, String>{
         User u = userService.findByUsername(user.getUsername());
         // 清除持久上下文环境 避免后面语句导致持久化
         entityManager.clear();
-        u.setPassword(null);
+//        u.setPassword(null);
         return new ResultUtil<User>().setData(u);
     }
 }
