@@ -29,4 +29,9 @@ public class RoleServiceImpl implements RoleService {
     public RoleDao getRepository() {
         return roleDao;
     }
+
+    @Override
+    public List<Role> findByDefaultRole(Boolean defaultRole) {
+        return roleDao.findByDefaultRole(defaultRole);
+    }
 }

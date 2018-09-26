@@ -12,5 +12,10 @@ import java.util.List;
  * @author Edwin
  */
 public interface RoleService extends BaseService<Role,String> {
-
+    /**
+     * 获取默认角色
+     * @param defaultRole
+     * @return
+     */
+    List<Role> findByDefaultRole(Boolean defaultRole);
 }

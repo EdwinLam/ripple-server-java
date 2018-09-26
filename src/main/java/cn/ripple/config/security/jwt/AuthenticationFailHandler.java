@@ -4,8 +4,8 @@ package cn.ripple.config.security.jwt;
 import cn.hutool.core.util.StrUtil;
 import cn.ripple.common.enums.ResponseCodeEnum;
 import cn.ripple.common.exception.LoginFailLimitException;
+import cn.ripple.common.exception.RippleException;
 import cn.ripple.common.utils.ResponseUtil;
-import cn.ripple.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,7 +58,7 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
         } else if (e instanceof LoginFailLimitException){
             ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.BUSINESS_ERROR.getValue(),((LoginFailLimitException) e).getMsg()));
         } else {
-            ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.BUSINESS_ERROR.getValue(),"登录失败"));
+            throw new RippleException(ResponseCodeEnum.BUSINESS_ERROR,"登录失败");
         }
     }
 

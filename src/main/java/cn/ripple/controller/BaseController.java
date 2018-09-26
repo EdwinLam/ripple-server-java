@@ -35,10 +35,10 @@ public abstract class BaseController<E, ID extends Serializable> {
     @RequestMapping(value = "/getAll",method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "获取全部数据")
-    public Result<List<E>> getAll(){
+    public List<E> getAll(){
 
         List<E> list = getService().getAll();
-        return new ResultUtil<List<E>>().setData(list);
+        return list;
     }
 
     @RequestMapping(value = "/getByPage",method = RequestMethod.GET)

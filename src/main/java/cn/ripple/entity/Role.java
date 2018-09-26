@@ -1,6 +1,5 @@
 package cn.ripple.entity;
 
-import cn.ripple.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,8 +18,14 @@ public class Role extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "角色名称")
-    private String roleName;
+    @ApiModelProperty(value = "角色名 以ROLE_开头")
+    private String name;
+
+    @ApiModelProperty(value = "是否为注册默认角色")
+    private Boolean defaultRole;
+
+    @ApiModelProperty(value = "备注")
+    private String description;
 
     @Transient
     @TableField(exist=false)

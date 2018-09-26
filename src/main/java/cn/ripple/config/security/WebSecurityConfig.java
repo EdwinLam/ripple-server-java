@@ -9,6 +9,7 @@ import cn.ripple.config.security.jwt.RestAccessDeniedHandler;
 import cn.ripple.config.security.permission.MyFilterSecurityInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,7 +18,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.web.cors.CorsUtils;
 
 /**
@@ -67,7 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         registry.and()
                 //表单登录方式
                 .formLogin()
-                .loginPage("/xboot/common/needLogin")
                 //登录需要经过的url请求
                 .loginProcessingUrl("/ripple/login")
                 .permitAll()
@@ -77,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(failHandler)
                 .and()
                 .logout()
-                .permitAll()
+                .permitAll().and().exceptionHandling().authenticationEntryPoint( macLoginUrlAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()//就是这一行
@@ -100,5 +102,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(myFilterSecurityInterceptor, FilterSecurityInterceptor.class)
                 //添加JWT过滤器 除/login其它请求都需经过此过滤器
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+    }
+
+    @Bean
+    public AuthenticationEntryPoint macLoginUrlAuthenticationEntryPoint() {
+        return new MacLoginUrlAuthenticationEntryPoint("/login");
     }
 }

@@ -80,7 +80,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
 
                 if(StrUtil.isNotBlank(authority)){
                     List<String> list = new Gson().fromJson(authority, new TypeToken<List<String>>(){}.getType());
-                    for(String ga : list){
+                        for(String ga : list){
                         authorities.add(new SimpleGrantedAuthority(ga));
                     }
                 }
@@ -90,9 +90,9 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     return new UsernamePasswordAuthenticationToken(principal, null, authorities);
                 }
             } catch (ExpiredJwtException e) {
-                ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.TOKEN_TIME_OUT.getValue(),"解析token错误"));
+                throw new RippleException(ResponseCodeEnum.TOKEN_TIME_OUT);
             } catch (Exception e){
-                ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.TOKEN_TIME_OUT.getValue(),"解析token错误"));
+                throw new RippleException(ResponseCodeEnum.TOKEN_TIME_OUT);
             }
         }
         return null;

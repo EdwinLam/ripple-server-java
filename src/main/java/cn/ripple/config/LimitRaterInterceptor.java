@@ -50,30 +50,30 @@ public class LimitRaterInterceptor extends HandlerInterceptorAdapter {
                              Object handler) throws Exception {
 
         // IP限流 在线Demo所需 一秒限5个请求
-        String token1 = redisRaterLimiter.acquireTokenFromBucket(IpInfoUtil.getIpAddr(request), 5, 1000);
-        if (StrUtil.isBlank(token1)) {
-            throw new RippleException("你手速怎么这么快，请点慢一点");
-        }
+//        String token1 = redisRaterLimiter.acquireTokenFromBucket(IpInfoUtil.getIpAddr(request), 5, 1000);
+//        if (StrUtil.isBlank(token1)) {
+//            throw new RippleException("你手速怎么这么快，请点慢一点");
+//        }
+//
+//        if(rateLimitEnable){
+//            String token2 = redisRaterLimiter.acquireTokenFromBucket(CommonConstant.LIMIT_ALL, limit, timeout);
+//            if (StrUtil.isBlank(token2)) {
+//                throw new RippleException("当前访问总人数太多啦，请稍后再试");
+//            }
+//        }
 
-        if(rateLimitEnable){
-            String token2 = redisRaterLimiter.acquireTokenFromBucket(CommonConstant.LIMIT_ALL, limit, timeout);
-            if (StrUtil.isBlank(token2)) {
-                throw new RippleException("当前访问总人数太多啦，请稍后再试");
-            }
-        }
-
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-        Method method = handlerMethod.getMethod();
-        RateLimiter rateLimiter = method.getAnnotation(RateLimiter.class);
-
-        if (rateLimiter != null) {
-            int limit = rateLimiter.limit();
-            int timeout = rateLimiter.timeout();
-            String token3 = redisRaterLimiter.acquireTokenFromBucket(method.getName(), limit, timeout);
-            if (StrUtil.isBlank(token3)) {
-                throw new RippleException("当前访问人数太多啦，请稍后再试");
-            }
-        }
+//        HandlerMethod handlerMethod = (HandlerMethod) handler;
+//        Method method = handlerMethod.getMethod();
+//        RateLimiter rateLimiter = method.getAnnotation(RateLimiter.class);
+//
+//        if (rateLimiter != null) {
+//            int limit = rateLimiter.limit();
+//            int timeout = rateLimiter.timeout();
+//            String token3 = redisRaterLimiter.acquireTokenFromBucket(method.getName(), limit, timeout);
+//            if (StrUtil.isBlank(token3)) {
+//                throw new RippleException("当前访问人数太多啦，请稍后再试");
+//            }
+//        }
         return true;
     }
 
