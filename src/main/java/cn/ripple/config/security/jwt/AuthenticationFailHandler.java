@@ -1,11 +1,8 @@
 package cn.ripple.config.security.jwt;
 
-
 import cn.hutool.core.util.StrUtil;
-import cn.ripple.common.enums.ResponseCodeEnum;
 import cn.ripple.common.exception.LoginFailLimitException;
 import cn.ripple.common.exception.RippleException;
-import cn.ripple.common.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,13 +13,16 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ *  @Auther: Edwin
+ *  @Date: 2018/9/27 11:02
+ *  @Description: 失败处理
+ */
 @Slf4j
 @Component
 public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHandler {
@@ -37,8 +37,7 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
     private StringRedisTemplate redisTemplate;
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
-
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws ServletException {
         if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
             String username = request.getParameter("username");
             recordLoginTime(username);
@@ -51,14 +50,13 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
             int loginFailTime = Integer.parseInt(value);
             int restLoginTime = loginTimeLimit - loginFailTime;
             log.info("用户"+username+"登录失败，还有"+restLoginTime+"次机会");
-            ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.BUSINESS_ERROR.getValue(),"用户名或密码错误"));
+            throw new RippleException("用户名或密码错误");
         } else if (e instanceof DisabledException) {
-
-            ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.BUSINESS_ERROR.getValue(),"账户被禁用，请联系管理员"));
+            throw new RippleException("账户被禁用，请联系管理员");
         } else if (e instanceof LoginFailLimitException){
-            ResponseUtil.out(response, ResponseUtil.resultMap(false,ResponseCodeEnum.BUSINESS_ERROR.getValue(),((LoginFailLimitException) e).getMsg()));
+            throw new RippleException("超过错误登录次数，不能登录");
         } else {
-            throw new RippleException(ResponseCodeEnum.BUSINESS_ERROR,"登录失败");
+            throw new RippleException("登录失败");
         }
     }
 
@@ -66,7 +64,6 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
      * 判断用户登陆错误次数
      */
     public boolean recordLoginTime(String username){
-
         String key = "loginTimeLimit:"+username;
         String flagKey = "loginFailFlag:"+username;
         String value = redisTemplate.opsForValue().get(key);
@@ -77,7 +74,6 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
         int loginFailTime = Integer.parseInt(value) + 1;
         redisTemplate.opsForValue().set(key, String.valueOf(loginFailTime), loginAfterTime, TimeUnit.MINUTES);
         if(loginFailTime>=loginTimeLimit){
-
             redisTemplate.opsForValue().set(flagKey, "fail", loginAfterTime, TimeUnit.MINUTES);
             return false;
         }

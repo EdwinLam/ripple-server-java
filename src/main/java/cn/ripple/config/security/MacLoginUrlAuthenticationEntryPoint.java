@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
+/**
+ * 没有登录时候拦截用
+ */
 @Slf4j
 public class MacLoginUrlAuthenticationEntryPoint implements AuthenticationEntryPoint,
         InitializingBean {
