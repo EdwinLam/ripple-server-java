@@ -1,16 +1,13 @@
-package cn.ripple.service;
+package cn.ripple.serviceimpl;
 
 import cn.ripple.dao.DepartmentDao;
 import cn.ripple.entity.Department;
 import cn.ripple.service.DepartmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

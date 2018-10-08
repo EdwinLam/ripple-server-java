@@ -26,10 +26,8 @@ public abstract class BaseController<E, ID extends Serializable> {
     @RequestMapping(value = "/get/{id}",method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "通过id获取")
-    public Result<E> get(@PathVariable ID id){
-
-        E entity = getService().get(id);
-        return new ResultUtil<E>().setData(entity);
+    public E get(@PathVariable ID id){
+        return getService().get(id);
     }
 
     @RequestMapping(value = "/getAll",method = RequestMethod.GET)

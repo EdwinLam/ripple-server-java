@@ -251,15 +251,15 @@ public class UserController extends BaseController<User, String>{
 
     @RequestMapping(value = "/admin/add",method = RequestMethod.POST)
     @ApiOperation(value = "添加用户")
-    public Result<Object> add(@ModelAttribute User u,
+    public User add(@ModelAttribute User u,
                                  @RequestParam(required = false) String[] roles){
 
         if(StrUtil.isBlank(u.getUsername()) || StrUtil.isBlank(u.getPassword())){
-            return new ResultUtil<>().setErrorMsg("缺少必需表单字段");
+            throw new RippleException("缺少必需表单字段");
         }
 
         if(userService.findByUsername(u.getUsername())!=null){
-            return new ResultUtil<>().setErrorMsg("该用户名已被注册");
+            throw new RippleException("该用户名已被注册");
         }
         //删除缓存
         redisTemplate.delete("user::"+u.getUsername());
@@ -268,7 +268,7 @@ public class UserController extends BaseController<User, String>{
         u.setPassword(encryptPass);
         User user=userService.save(u);
         if(user==null){
-            return new ResultUtil<>().setErrorMsg("添加失败");
+            throw new RippleException("添加失败");
         }
         if(roles!=null&&roles.length>0){
             //添加角色
@@ -280,7 +280,7 @@ public class UserController extends BaseController<User, String>{
             }
         }
 
-        return new ResultUtil<>().setData(user);
+        return user;
     }
 
     @RequestMapping(value = "/info",method = RequestMethod.GET)

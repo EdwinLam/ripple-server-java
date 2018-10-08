@@ -39,7 +39,7 @@ public class UploadController {
 
     @RequestMapping(value = "/file",method = RequestMethod.POST)
     @ApiOperation(value = "文件上传")
-    public Result<Object> upload(@RequestParam("file") MultipartFile file,
+    public String upload(@RequestParam("file") MultipartFile file,
                                  HttpServletRequest request) {
 
 //        // IP限流 在线Demo所需 5分钟限1个请求
@@ -54,17 +54,16 @@ public class UploadController {
             FileInputStream inputStream = (FileInputStream) file.getInputStream();
             //上传七牛云服务器
             imagePath= qiniuUtil.qiniuInputStreamUpload(inputStream,fileName);
-            if(StrUtil.isBlank(imagePath)){
-                return new ResultUtil<>().setErrorMsg("上传失败，请检查七牛云配置");
-            }
+            if(StrUtil.isBlank(imagePath))
+                throw new RippleException("上传失败，请检查七牛云配置");
             if(imagePath.contains("error")){
-                return new ResultUtil<>().setErrorMsg(imagePath);
+                throw new RippleException(imagePath);
             }
         } catch (Exception e) {
             log.error(e.toString());
-            return new ResultUtil<>().setErrorMsg(e.toString());
+            throw new RippleException(e.toString());
         }
 
-        return new ResultUtil<Object>().setData(imagePath);
+        return imagePath;
     }
 }

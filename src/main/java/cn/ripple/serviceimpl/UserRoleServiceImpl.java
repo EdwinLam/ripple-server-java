@@ -1,4 +1,4 @@
-package cn.ripple.service;
+package cn.ripple.serviceimpl;
 
 import cn.ripple.dao.UserRoleDao;
 import cn.ripple.entity.UserRole;
