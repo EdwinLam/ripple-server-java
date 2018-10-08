@@ -19,7 +19,8 @@ public class Role extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "角色名 以ROLE_开头")
-    private String name;
+    private String roleName;
+
 
     @ApiModelProperty(value = "是否为注册默认角色")
     private Boolean defaultRole;

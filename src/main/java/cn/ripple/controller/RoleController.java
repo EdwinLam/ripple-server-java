@@ -33,9 +33,8 @@ public class RoleController extends BaseController<Role, String>{
 
     @RequestMapping(value = "/getAllList",method = RequestMethod.GET)
     @ApiOperation(value = "获取全部角色")
-    public Result<Object> roleGetAll(){
-        List<Role> list = roleService.getAll();
-        return new ResultUtil<>().setData(list);
+    public List<Role>  roleGetAll(){
+        return roleService.getAll();
     }
 
 

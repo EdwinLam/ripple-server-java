@@ -71,9 +71,9 @@ public class UserController extends BaseController<User, String>{
         return userService;
     }
 
-    @RequestMapping(value = "/regist",method = RequestMethod.POST)
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ApiOperation(value = "注册用户")
-    public Result<Object> regist(@ModelAttribute User u,
+    public User register(@ModelAttribute User u,
                                  @RequestParam String verify,
                                  @RequestParam String captchaId){
 
@@ -90,11 +90,11 @@ public class UserController extends BaseController<User, String>{
 
         if(!verify.toLowerCase().equals(code.toLowerCase())) {
             log.error("注册失败，验证码错误：code:"+ verify +",redisCode:"+code.toLowerCase());
-            return new ResultUtil<>().setErrorMsg("验证码输入错误");
+            throw new RippleException("验证码输入错误");
         }
 
         if(userService.findByUsername(u.getUsername())!=null){
-            return new ResultUtil<>().setErrorMsg("该用户名已被注册");
+            throw new RippleException("该用户名已被注册");
         }
         //删除缓存
         redisTemplate.delete("user::"+u.getUsername());
@@ -104,7 +104,7 @@ public class UserController extends BaseController<User, String>{
         u.setType(CommonConstant.USER_TYPE_NORMAL);
         User user=userService.save(u);
         if(user==null){
-            return new ResultUtil<>().setErrorMsg("注册失败");
+            throw new RippleException("注册失败");
         }
         // 默认角色
         List<Role> roleList = roleService.findByDefaultRole(true);
@@ -117,12 +117,12 @@ public class UserController extends BaseController<User, String>{
             }
         }
 
-        return new ResultUtil<>().setData(user);
+        return user;
     }
 
     @RequestMapping(value = "/getByCondition",method = RequestMethod.GET)
     @ApiOperation(value = "多条件分页获取用户列表")
-    public Result<Page<User>> getByCondition(@ModelAttribute User user,
+    public Page<User> getByCondition(@ModelAttribute User user,
                                              @ModelAttribute SearchVo searchVo,
                                              @ModelAttribute PageVo pageVo){
 
@@ -134,7 +134,7 @@ public class UserController extends BaseController<User, String>{
             entityManager.clear();
             u.setPassword(null);
         }
-        return new ResultUtil<Page<User>>().setData(page);
+        return page;
     }
 
     /**
@@ -146,32 +146,31 @@ public class UserController extends BaseController<User, String>{
      */
     @RequestMapping(value = "/modifyPass",method = RequestMethod.POST)
     @ApiOperation(value = "修改密码")
-    public Result<Object> modifyPass(@ApiParam("需用户id获取原用户数据") @RequestParam String id,
+    public User modifyPass(@ApiParam("需用户id获取原用户数据") @RequestParam String id,
                                      @ApiParam("password") @RequestParam String password,
                                      @ApiParam("新密码") @RequestParam String newPass){
 
         User old = userService.get(id);
 
         if(!new BCryptPasswordEncoder().matches(password,old.getPassword())){
-            return new ResultUtil<>().setErrorMsg("旧密码不正确");
+            throw new RippleException("旧密码不正确");
         }
 
         //在线DEMO所需
         if("test".equals(old.getUsername())||"test2".equals(old.getUsername())){
-            return new ResultUtil<>().setErrorMsg("演示账号不支持修改密码");
+            throw new RippleException("演示账号不支持修改密码");
         }
 
         String newEncryptPass= new BCryptPasswordEncoder().encode(newPass);
         old.setPassword(newEncryptPass);
         User user=userService.update(old);
         if(user==null){
-            return new ResultUtil<>().setErrorMsg("修改失败");
+            throw new RippleException("修改失败");
         }
 
         //手动更新缓存
         redisTemplate.delete("user::"+user.getUsername());
-
-        return new ResultUtil<>().setData(user);
+        return user;
     }
 
     @RequestMapping(value = "/unlock",method = RequestMethod.POST)
@@ -286,49 +285,48 @@ public class UserController extends BaseController<User, String>{
 
     @RequestMapping(value = "/info",method = RequestMethod.GET)
     @ApiOperation(value = "获取当前登录用户接口")
-    public Result<User> getUserInfo(){
+    public User getUserInfo(){
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User u = userService.findByUsername(user.getUsername());
         // 清除持久上下文环境 避免后面语句导致持久化
         entityManager.clear();
 //        u.setPassword(null);
-        return new ResultUtil<User>().setData(u);
+        return u;
     }
 
     @RequestMapping(value = "/admin/disable/{userId}",method = RequestMethod.POST)
     @ApiOperation(value = "后台禁用用户")
-    public Result<Object> disable(@ApiParam("用户唯一id标识") @PathVariable String userId){
+    public User disable(@ApiParam("用户唯一id标识") @PathVariable String userId){
 
         User user=userService.get(userId);
-        if(user==null){
-            return new ResultUtil<>().setErrorMsg("通过userId获取用户失败");
-        }
+        if(user==null)
+            throw new RippleException("通过userId获取用户失败");
         user.setStatus(CommonConstant.USER_STATUS_LOCK);
         userService.update(user);
         //手动更新缓存
         redisTemplate.delete("user::"+user.getUsername());
-        return new ResultUtil<>().setData(null);
+        return user;
     }
 
     @RequestMapping(value = "/admin/enable/{userId}",method = RequestMethod.POST)
     @ApiOperation(value = "后台启用用户")
-    public Result<Object> enable(@ApiParam("用户唯一id标识") @PathVariable String userId){
+    public User enable(@ApiParam("用户唯一id标识") @PathVariable String userId){
 
         User user=userService.get(userId);
         if(user==null){
-            return new ResultUtil<>().setErrorMsg("通过userId获取用户失败");
+            throw new RippleException("通过userId获取用户失败");
         }
         user.setStatus(CommonConstant.USER_STATUS_NORMAL);
         userService.update(user);
         //手动更新缓存
         redisTemplate.delete("user::"+user.getUsername());
-        return new ResultUtil<>().setData(null);
+        return user;
     }
 
 
     @RequestMapping(value = "/delByIds/{ids}",method = RequestMethod.DELETE)
     @ApiOperation(value = "批量通过ids删除")
-    public Result<Object> delAllByIds(@PathVariable String[] ids){
+    public boolean delAllByIds(@PathVariable String[] ids){
 
         for(String id:ids){
             User u = userService.get(id);
@@ -338,6 +336,6 @@ public class UserController extends BaseController<User, String>{
             //删除关联角色
             userRoleService.deleteByUserId(id);
         }
-        return new ResultUtil<>().setSuccessMsg("批量通过id删除数据成功");
+        return true;
     }
 }

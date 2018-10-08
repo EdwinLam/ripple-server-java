@@ -80,11 +80,11 @@ public abstract class BaseController<E, ID extends Serializable> {
     @RequestMapping(value = "/delByIds",method = RequestMethod.DELETE)
     @ResponseBody
     @ApiOperation(value = "批量通过ids删除")
-    public Result<Object> delAllByIds(@RequestParam ID[] ids){
+    public boolean delAllByIds(@RequestParam ID[] ids){
 
         for(ID id:ids){
             getService().delete(id);
         }
-        return new ResultUtil<Object>().setSuccessMsg("批量通过id删除数据成功");
+        return true;
     }
 }
