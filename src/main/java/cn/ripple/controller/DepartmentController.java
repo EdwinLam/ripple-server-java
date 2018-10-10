@@ -44,7 +44,7 @@ public class DepartmentController extends BaseController<Department, String>{
 
     @RequestMapping(value = "/getByParentId/{parentId}",method = RequestMethod.GET)
     @ApiOperation(value = "通过id获取")
-    @Cacheable(key = "#parentId")
+//    @Cacheable(key = "#parentId")
     public List<Department> getByParentId(@PathVariable String parentId){
 
         List<Department> list = departmentService.findByParentIdOrderBySortOrder(parentId);

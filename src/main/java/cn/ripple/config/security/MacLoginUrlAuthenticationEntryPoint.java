@@ -87,14 +87,14 @@ public class MacLoginUrlAuthenticationEntryPoint implements AuthenticationEntryP
      * Performs the redirect (or forward) to the login form URL.
      */
     public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException, ServletException {
+                         AuthenticationException authException) throws IOException {
         // redirect to login page. Use https if forceHttps true
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
         StringBuffer sb = new StringBuffer();
-        sb.append("{\"code\":").append(ResponseCodeEnum.ACCESS_DENY.getValue())
-                .append(",\"msg\":\"");
-        sb.append("没有访问权限");
+        sb.append("{\"code\":").append(ResponseCodeEnum.TOKEN_TIME_OUT.getValue())
+                .append(",\"message\":\"");
+        sb.append("token无效");
         sb.append("\",\"time\":");
         sb.append(new Date().getTime());
         sb.append("}");
