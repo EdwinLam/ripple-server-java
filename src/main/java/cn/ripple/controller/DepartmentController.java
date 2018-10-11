@@ -63,7 +63,7 @@ public class DepartmentController extends BaseController<Department, String>{
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation(value = "添加")
     @CacheEvict(key = "#department.parentId")
-    public Result<Department> add(@ModelAttribute Department department){
+    public Department add(@ModelAttribute Department department){
 
         Department d = departmentService.save(department);
         // 如果不是添加的一级 判断设置上级为父节点标识
@@ -76,7 +76,7 @@ public class DepartmentController extends BaseController<Department, String>{
                 redisTemplate.delete("department::" + parent.getParentId());
             }
         }
-        return new ResultUtil<Department>().setData(d);
+        return d;
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
