@@ -1,0 +1,34 @@
+archivesBaseName = 'ripple-service'
+
+
+dependencies {
+    runtime('mysql:mysql-connector-java')
+    // spring-boot
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.springframework.boot:spring-boot-starter-parent:2.0.3.RELEASE'
+    compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+    // zookeeper相关
+//    compile 'org.springframework.cloud:spring-cloud-starter-zookeeper-config:2.0.0.RELEASE'
+//    compile 'com.alibaba.spring.boot:dubbo-spring-boot-starter:2.0.0'
+//    compile 'com.101tec:zkclient:0.9'
+    // Redis
+    compile('org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE')
+    // 数据库连接池
+    compile('com.alibaba:druid:1.1.4')
+    // MybatisPlus
+    compile('com.baomidou:mybatis-plus-boot-starter:2.2.0')
+    provided project(':ripple-entity')
+    // Gson
+    compile('com.google.code.gson:gson:2.8.2')
+    // JWT
+    compile('io.jsonwebtoken:jjwt:0.9.0')
+
+    // Jasypt加密
+    compile('com.github.ulisesbocchio:jasypt-spring-boot-starter:1.18')
+    //引入消息中心RPC接口
+    compile (group: "cn.thinkjoy.qky.msg", name: "qky-msg-api", version: "$msgApiVersion", changing: true)
+}

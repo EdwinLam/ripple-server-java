@@ -1,84 +1,63 @@
-// buildscript中的声明是gradle脚本自身需要使用的资源
+apply from: 'dependencies.gradle'
+
 buildscript {
     ext {
         springBootVersion = '2.0.3.RELEASE'
     }
     repositories {
+        repositories { maven { url 'http://repo.qtonecloud.cn/content/groups/public/' } }
+        repositories { maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' } }
         mavenCentral()
-        //添加maven仓库 mybatis-generetor
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
     }
+
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath 'org.springframework:springloaded:1.2.7.RELEASE'
-        // mybatis-generator 插件路径
-        classpath "gradle.plugin.com.arenagod.gradle:mybatis-generator-plugin:1.4"
+        classpath 'org.springframework.cloud:spring-cloud-dependencies:Greenwich.M3'
     }
 }
 
-//引入 mybatis-generator 插件
-apply plugin: "com.arenagod.gradle.MybatisGenerator"
 
-//配置从阿里云源下载依赖
-allprojects {
+
+// 所有子项目的通用配置
+subprojects {
     apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'//应用依赖管理插件
-    apply plugin: 'maven'
-    group = 'com.ripple'
-    version = '0.0.1-SNAPSHOT'
+    group 'cn.ripple'
+    version 'demo-0.0.1-SNAPSHOT'
+    // JVM 版本号要求
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
-    apply plugin: 'war'// war可以将开发的应用打包成部署包
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
+        }
+        provided
+        compile.extendsFrom provided
+        all*.exclude group: 'org.springframework', module: 'spring'
+        all*.exclude group: 'asm', module: 'asm'
+        all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+        repositories { maven { url 'http://repo.qtonecloud.cn/content/groups/public/' } }
+        repositories { maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' } }
         mavenCentral()
     }
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
-        options.warnings = false
-    }
-    dependencies {
-        compile('org.springframework.boot:spring-boot-starter-web')
-        compile('org.springframework.boot:spring-boot-starter-security')
-        compile('org.springframework.boot:spring-boot-starter-aop')
-        compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
-        compile('org.springframework.boot:spring-boot-starter-actuator')
 
-        runtime('mysql:mysql-connector-java')
-        providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-        compile fileTree(dir: 'libs', include: ['*.jar'])
-        // 数据库连接池
-        compile('com.alibaba:druid:1.1.4')
-        // Mysql Connector
-//        compile('mysql:mysql-connector-java:5.1.44')
-        // JWT
-        compile('io.jsonwebtoken:jjwt:0.9.0')
-        // JPA
-        compile('org.springframework.boot:spring-boot-starter-data-jpa')
-        // MybatisPlus
-        compile('com.baomidou:mybatis-plus-boot-starter:2.2.0')
-        // Redis
-        compile('org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE')
-        // Swagger API文档
-        compile('io.springfox:springfox-swagger-ui:2.7.0')
-        compile('io.springfox:springfox-swagger2:2.7.0')
-        // Hutool工具包
+    dependencies {
+        developmentOnly("org.springframework.boot:spring-boot-devtools")
         compile('cn.hutool:hutool-all:4.0.5')
-        // Gson
-        compile('com.google.code.gson:gson:2.8.2')
-        // 七牛图片上传SDK
-        compile('com.qiniu:qiniu-java-sdk:[7.2.0, 7.2.99]')
         // Lombok
-        compile('org.projectlombok:lombok:1.16.20')
-        // Jasypt加密
-        compile('com.github.ulisesbocchio:jasypt-spring-boot-starter:1.18')
-        // Beet代码生成
-        compile('com.ibeetl:beetl:2.8.3')
-        // 热更新
-        compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
+        compile 'org.projectlombok:lombok:1.18.4'
+        // 加载lib目录下所有的jar
+        compile fileTree(dir: '../lib', include: ['*.jar'])
     }
 }
+
