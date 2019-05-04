@@ -4,18 +4,8 @@ package cn.ripple.enums;
  * Created by tengen on 2015/12/23.
  */
 public enum AppCodeEnum {
-    /**
-     * 全课云
-     */
-    QKY("qky", "全课云"),
-    /**
-     * 全课云主平台后台
-     */
-    QKY_ADMIN("QKY_ADMIN", "全课云主平台后台"),
-    /**
-     * 班级小助手
-     */
-    QKY_CLASSGROUP("QKY_CLASSGROUP", "班级小助手");
+
+    RIPPLE("RIPPLE", "RIPPLE");
 
     /**
      * 由一个值和名称实例化对象

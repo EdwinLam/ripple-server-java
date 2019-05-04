@@ -1,6 +1,6 @@
 package ${entity.daoPackage};
 
-import cn.ripple.classgroup.entity.${entity.className};
+import cn.ripple.entity.${entity.className};
 
 /**
  * @Author ${entity.author}

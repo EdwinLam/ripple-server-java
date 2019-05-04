@@ -1,7 +1,5 @@
 package cn.ripple.config.security;
-
-
-import cn.ripple.entity.BasUser;
+import cn.ripple.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +10,7 @@ import java.util.List;
 
 
 @Slf4j
-public class SecurityUserDetails extends BasUser implements UserDetails {
+public class SecurityUserDetails extends User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 

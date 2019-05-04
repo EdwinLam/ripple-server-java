@@ -1,6 +1,6 @@
 package cn.ripple.config.protocol;
 
-import cn.ripple.exception.QkyException;
+import cn.ripple.exception.RippleException;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +20,7 @@ public class Response implements Serializable {
      */
     private Date timestamp;
 
-    public Response(QkyException rippleException) {
+    public Response(RippleException rippleException) {
         this.code = rippleException.getCode();
         this.message = rippleException.getMessage();
         this.timestamp = new Date();

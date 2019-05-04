@@ -30,12 +30,12 @@ spring:
   jpa:
     show-sql: true
     # 自动生成表结构
-    generate-ddl: false
+    generate-ddl: true
     hibernate:
       naming:
         # 驼峰命名
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: none
+      ddl-auto: update
   # Redis
   redis:
     host: 127.0.0.1
@@ -55,8 +55,7 @@ spring:
 weixin:
   appid: wxc151da26a58d32ce
   secret: 0c4b859d84bfe08c722678236d982937
-  apiUrl: https://api.weixin.qq.com/sns/jscode2session
-  grant_type: authorization_code
+  apiUrl: https://api.weixin.qq.com
 
 qky:
   # token过期时间（分钟）

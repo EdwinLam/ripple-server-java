@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 //添加JWT过滤器
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+                .addFilter(new JwtAuthenticationFilter(authenticationManager()));
     }
 
     @Bean

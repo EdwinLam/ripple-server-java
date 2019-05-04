@@ -1,28 +1,28 @@
 package cn.ripple.controller;
 
-import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSONObject;
+import cn.hutool.core.util.StrUtil;
 import cn.ripple.constant.SecurityConstant;
-import cn.ripple.entity.BasUser;
-import cn.ripple.entity.GroupUserRel;
-import cn.ripple.enums.GroupUserIdentityEnum;
-import cn.ripple.result.SystemUser;
-import cn.ripple.service.BasGroupService;
-import cn.ripple.service.BasUserService;
-import cn.ripple.service.GroupUserRelService;
-import cn.ripple.utils.UserInfoRedisUtils;
+import cn.ripple.entity.User;
+import cn.ripple.entity.wechat.Jscode2session;
+import cn.ripple.enums.WechatErrCodeEnum;
+import cn.ripple.exception.RippleException;
+import cn.ripple.service.UserService;
+import cn.ripple.service.WeChatService;
 import com.google.gson.Gson;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * @Author: Edwin
@@ -32,98 +32,38 @@ import java.util.HashMap;
 @RestController
 @Api(description = "登录相关接口")
 @RequestMapping("/system")
-public class SystemController extends BaseController{
-
-    @Value("${weixin.appid}")
-    private String appid;
-
-    @Value("${weixin.secret}")
-    private String secret;
-
-    @Value("${weixin.apiUrl}")
-    private String apiUrl;
-
-    @Value("${weixin.grant_type}")
-    private String grant_type;
-
+public class SystemController extends BaseController {
     @Value("${qky.tokenExpireTime}")
     private Integer tokenExpireTime;
 
     @Autowired
-    BasUserService basUserService;
+    UserService userService;
 
     @Autowired
-    GroupUserRelService groupUserRelService;
-
-    @Autowired
-    private BasGroupService basGroupService;
-
-    @Autowired
-    private UserInfoRedisUtils userInfoRedisUtils;
+    private WeChatService weChatService;
 
 
     @RequestMapping(value = "/ssoLogin", method = RequestMethod.POST)
     @ApiOperation(value = "微信单点登录接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "code",value = "登录凭证",paramType = "form",dataType = "String"),
-    })
-    public String ssoLogin(@RequestBody String code){
-        // 微信接口验证
-        HashMap<String, Object> paramMap = new HashMap<>();
-        paramMap.put("appid", appid);
-        paramMap.put("secret",secret);
-        paramMap.put("js_code", code);
-        paramMap.put("grant_type", grant_type);
-        String jsonResultStr= HttpUtil.get(apiUrl, paramMap);
-        JSONObject result = new JSONObject(jsonResultStr);
-        String openid = result.get("openid").toString();
-        Object exp = result.get("expires_in");
-        int expires_in = exp==null?tokenExpireTime * 60 * 1000:Integer.parseInt(exp.toString());
-        // 获取账号
-        BasUser basUser = basUserService.synBasUser(openid);
-        // 同步账号分组信息
-        groupUserRelService.synRelToUser(basUser);
-        // 设置redis
-        userInfoRedisUtils.setCurUser(basUser);
-        // 生成jwt
-        String token = Jwts.builder()
-                .setSubject(basUser.getOpenid())
-                .claim(SecurityConstant.AUTHORITIES, new Gson().toJson(new ArrayList<>()))
-                .claim("userId", basUser.getId())
-                .setExpiration(new Date(System.currentTimeMillis() + expires_in))
-                .signWith(SignatureAlgorithm.HS512, SecurityConstant.JWT_SIGN_KEY)
-                .compact();
-        return SecurityConstant.TOKEN_SPLIT + token;
-    }
-
-    @RequestMapping(value = "/switchGroup", method = RequestMethod.POST)
-    @ApiOperation(value = "切换用户分组")
-    public Boolean switchGroup(@ApiParam(name="userId",value="用户id")Long groupId){
-        groupUserRelService.selectGroupRel(getCurrentUserId(),groupId);
-        return true;
-    }
-
-    @RequestMapping(value = "/getInfo", method = RequestMethod.GET)
-    @ApiOperation(value = "获取登录用户相关信息")
-    public SystemUser getInfo(){
-        BasUser basUser = getCurrentUser();
-        SystemUser systemUser = new SystemUser();
-        GroupUserRel groupUserRelParam = new GroupUserRel();
-        groupUserRelParam.setUserId(basUser.getId());
-        systemUser.setUserId(basUser.getId());
-        systemUser.setGroupNum((int)groupUserRelService.count(groupUserRelParam));
-        groupUserRelParam.setGroupId(getCurrentGroupId());
-        GroupUserRel groupUserRel = groupUserRelService.findOne(groupUserRelParam);
-        systemUser.setGroupName(groupUserRel.getBasGroup().getGroupName());
-        systemUser.setGroupId(groupUserRel.getGroupId());
-        systemUser.setGroupCode(groupUserRel.getBasGroup().getGroupCode());
-        systemUser.setGroupNotice(groupUserRel.getBasGroup().getNotice());
-        systemUser.setAdmin(groupUserRel.getUserIdentity()== GroupUserIdentityEnum.ADMIN.getValue());
-        systemUser.setOwner(groupUserRel.getUserIdentity()== GroupUserIdentityEnum.GROUP_OWNER.getValue());
-        systemUser.setAvatarUrl(basUser.getAvatarUrl());
-        systemUser.setGroupNickName(groupUserRel.getNickName());
-        systemUser.setPhoneNumber(basUser.getPhoneNumber());
-        systemUser.setStatisticalGroupMemberNumber(basGroupService.statisticalGroupMemberNumber(groupUserRel.getGroupId()));
-        return systemUser;
+    public String ssoLogin(@RequestBody User user) {
+        if (StrUtil.isBlank(user.getWeChatCode())) {
+            throw new RippleException("登录验证code不能为空");
+        }
+        Jscode2session jscode2session = weChatService.jscode2session(user.getWeChatCode());
+        if (jscode2session.getErrcode() == WechatErrCodeEnum.SUCCESS.getValue()) {
+            int expires_in = tokenExpireTime * 60 * 1000;
+            user = userService.synBasUser(jscode2session.getOpenid(), user);
+            userService.setCurUser(user);
+            String token = Jwts.builder()
+                    .setSubject(user.getWechatId())
+                    .claim(SecurityConstant.AUTHORITIES, new Gson().toJson(new ArrayList<>()))
+                    .claim("userCode", user.getCode())
+                    .setExpiration(new Date(System.currentTimeMillis() + expires_in))
+                    .signWith(SignatureAlgorithm.HS512, SecurityConstant.JWT_SIGN_KEY)
+                    .compact();
+            return SecurityConstant.TOKEN_SPLIT + token;
+        } else {
+            throw new RippleException("from wechat:"+jscode2session.getErrcode()+":"+jscode2session.getErrmsg());
+        }
     }
 }

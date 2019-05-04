@@ -1,7 +1,7 @@
 package ${entity.serviceImplPackage};
 
-import cn.ripple.classgroup.dao.${entity.className}Dao;
-import cn.ripple.classgroup.service.${entity.className}Service;
+import cn.ripple.dao.${entity.className}Dao;
+import cn.ripple.service.${entity.className}Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

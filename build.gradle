@@ -53,7 +53,7 @@ subprojects {
 
     dependencies {
         developmentOnly("org.springframework.boot:spring-boot-devtools")
-        compile('cn.hutool:hutool-all:4.0.5')
+        compile('cn.hutool:hutool-all:4.1.0')
         // Lombok
         compile 'org.projectlombok:lombok:1.18.4'
         // 加载lib目录下所有的jar

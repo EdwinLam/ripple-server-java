@@ -3,8 +3,8 @@ package cn.ripple.config.security;
 import cn.hutool.core.util.StrUtil;
 import cn.ripple.constant.SecurityConstant;
 import cn.ripple.enums.ResponseCodeEnum;
-import cn.ripple.exception.QkyException;
-import cn.ripple.utils.UserInfoRedisUtils;
+import cn.ripple.exception.RippleException;
+import cn.ripple.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -27,10 +27,10 @@ import java.util.ArrayList;
  * @Author: Edwin
  * @Description:
  */
-public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
+public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
@@ -69,19 +69,19 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                 //获取用户名
                 String openId = claims.getSubject();
                 if (StrUtil.isNotBlank(openId)) {
-                    Long userId = Long.parseLong(claims.get("userId").toString());
+                    String userCode = claims.get("userCode").toString();
                     ServletContext context = request.getServletContext();
                     ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(context);
-                    UserInfoRedisUtils userInfoRedisUtils = ctx.getBean(UserInfoRedisUtils.class);
-                    if(userInfoRedisUtils.getUserById(userId)!=null){
-                        return new UsernamePasswordAuthenticationToken(userId, null, new ArrayList<>());
+                    UserService userService = ctx.getBean(UserService.class);
+                    if(userService.getUserByCode(userCode)!=null){
+                        return new UsernamePasswordAuthenticationToken(userCode, null, new ArrayList<>());
                     }
                 }
             } catch (ExpiredJwtException e) {
-                throw new QkyException(ResponseCodeEnum.TOKEN_TIME_OUT.getValue(), ResponseCodeEnum.TOKEN_TIME_OUT.getName());
+                throw new RippleException(ResponseCodeEnum.TOKEN_TIME_OUT.getValue(), ResponseCodeEnum.TOKEN_TIME_OUT.getName());
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new QkyException(ResponseCodeEnum.BUSINESS_ERROR.getValue(), "超时");
+                throw new RippleException(ResponseCodeEnum.BUSINESS_ERROR.getValue(), "超时");
             }
         }
         return null;

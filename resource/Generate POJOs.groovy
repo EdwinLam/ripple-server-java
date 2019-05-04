@@ -4,7 +4,7 @@ import com.intellij.database.util.Case
 import com.intellij.database.util.DasUtil
 
 
-packageName = "cn.ripple.classgroup.entity;"
+packageName = "cn.ripple.entity;"
 typeMapping = [
         (~/(?i)bigint/)                      : "Long",
         (~/(?i)tinyint|smallint|mediumint|int|integer/)                      : "Integer",

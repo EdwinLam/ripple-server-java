@@ -11,10 +11,19 @@ import org.springframework.data.domain.Sort;
 import java.io.Serializable;
 import java.util.List;
 
-//JDK8函数式接口注解 仅能包含一个抽象方法
+/**
+ * 基础服务类
+ * @Author Edwin
+ * @param <E>
+ * @param <ID>
+ */
 @FunctionalInterface
 public interface BaseService<E extends BaseEntity, ID extends Serializable> {
 
+    /**
+     * 获取资源
+     * @return
+     */
     BaseDao<E, ID> getRepository();
 
     /**
@@ -113,7 +122,7 @@ public interface BaseService<E extends BaseEntity, ID extends Serializable> {
     /**
      * 根据条件查询获取
      *
-     * @param spec
+     * @param entity
      * @return
      */
     default List<E> findAll(E entity) {
@@ -127,7 +136,11 @@ public interface BaseService<E extends BaseEntity, ID extends Serializable> {
      * @return
      */
     default E findOne(E entity) {
-        return (E) getRepository().findOne(new SpecificationUtil().entityToSpecification(entity)).get();
+        try {
+            return (E) getRepository().findOne(new SpecificationUtil().entityToSpecification(entity)).get();
+        }catch(Exception e){
+            return null;
+        }
     }
 
 

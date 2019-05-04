@@ -2,7 +2,7 @@ package cn.ripple.config.exception;
 
 
 import cn.ripple.config.protocol.Response;
-import cn.ripple.exception.QkyException;
+import cn.ripple.exception.RippleException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,9 +22,9 @@ public class ExceptionHandlerAdvice {
      * @param ex
      * @return
      */
-    @ExceptionHandler(QkyException.class)
+    @ExceptionHandler(RippleException.class)
     @ResponseBody
     public Map<String, Object> restError(HttpServletRequest request, HttpServletResponse response, Exception ex) {
-        return new Response((QkyException) ex).toMap();
+        return new Response((RippleException) ex).toMap();
     }
 }

@@ -13,23 +13,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * 代码生成
+ * @Author: Edwin
+ */
 @Slf4j
-public class QkyGenerator {
-    private static final String packageName = "cn.ripple.classgroup";
+public class RippleGenerator {
+    private static final String packageName = "cn.ripple";
 
-    private static final String packagePath = "cn/qky/classgroup";
+    private static final String packagePath = "cn/ripple";
 
     /**
      * 实体类名
      * 建议仅需修改
      */
-    private static final String className = "BizEnrollUser";
+    private static final String className = "User";
 
     /**
      * 类说明描述
      * 建议仅需修改
      */
-    private static final String description = "报名记录表";
+    private static final String description = "用户表";
 
     /**
      * 作者名
@@ -76,7 +80,7 @@ public class QkyGenerator {
     public static void main(String[] args) throws IOException {
 
         //模板路径
-        String root = System.getProperty("user.dir") + "/ripple-web/src/main/java/cn/qky/classgroup/generator/template";
+        String root = System.getProperty("user.dir") + "/ripple-web/src/main/java/cn/ripple/generator/template";
         FileResourceLoader resourceLoader = new FileResourceLoader(root, "utf-8");
         Configuration cfg = Configuration.defaultConfiguration();
         GroupTemplate gt = new GroupTemplate(resourceLoader, cfg);
